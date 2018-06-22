@@ -1,3 +1,8 @@
 kanbanboard {
-
+    ion-slide{
+        display: block !important;
+        align-items: unset !important;
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
+      }
 }

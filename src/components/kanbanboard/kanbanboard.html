@@ -1,4 +1,7 @@
 <!-- Generated template for the KanbanboardComponent component -->
-<div>
-  {{text}}
-</div>
+
+<ion-slides effect = "slide">
+  <ion-slide *ngFor="let column of board.columns">
+      <kanbancolumn [column] = column></kanbancolumn>
+  </ion-slide>
+</ion-slides>
