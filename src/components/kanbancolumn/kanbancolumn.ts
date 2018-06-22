@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 /**
  * Generated class for the KanbancolumnComponent component.
@@ -11,12 +11,10 @@ import { Component } from '@angular/core';
   templateUrl: 'kanbancolumn.html'
 })
 export class KanbancolumnComponent {
-
-  text: string;
+  @Input() column: Object;
 
   constructor() {
-    console.log('Hello KanbancolumnComponent Component');
-    this.text = 'Hello World';
+
   }
 
 }
