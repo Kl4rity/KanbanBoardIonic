@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 /**
  * Generated class for the KanbancardComponent component.
@@ -12,11 +12,10 @@ import { Component } from '@angular/core';
 })
 export class KanbancardComponent {
 
-  text: string;
+  @Input() card: Object;
 
   constructor() {
-    console.log('Hello KanbancardComponent Component');
-    this.text = 'Hello World';
+    
   }
 
 }
