@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { KanbanCard } from '../../models/KanbanCard.model';
 
 /**
  * Generated class for the KanbancardComponent component.
@@ -12,10 +13,10 @@ import { Component, Input } from '@angular/core';
 })
 export class KanbancardComponent {
 
-  @Input() card: Object;
+  @Input() card: KanbanCard;
 
   constructor() {
-    
+    console.log('Hello KanbancardComponent Component');
   }
 
 }

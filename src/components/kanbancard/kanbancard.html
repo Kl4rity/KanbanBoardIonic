@@ -3,7 +3,7 @@
   <ion-card-header>
     {{card.title}}
   </ion-card-header>
-  <ion-card-content>
+  <ion-card-content *ngIf="card.content">
     {{card.content}}
   </ion-card-content>
   <ion-row>
