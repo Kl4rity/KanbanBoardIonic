@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { KanbanColumn } from '../../models/KanbanColumn.model';
 
 /**
@@ -13,16 +13,16 @@ import { KanbanColumn } from '../../models/KanbanColumn.model';
 })
 export class KanbancolumnComponent {
   @Input() column: KanbanColumn;
+  @Output() move: EventEmitter<any>;
 
   constructor() {
     console.log('Hello KanbancolumnComponent Component');
+    this.move = new EventEmitter<any>();
   }
 
+  log($event){
+    this.move.emit(
+      {column: this.column, card: $event.card,  shift: $event.shift}
+    );
+  }
 }
-
-
-// Code for disabling event propagation.
-// for(var card of document.getElementsByClassName('slide-zoom')){
-// 	console.log(1);
-// 	card.addEventListener('mousedown', function(event){event.stopPropagation(); console.log(event);});
-// }

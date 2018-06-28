@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { KanbanCard } from '../../models/KanbanCard.model';
 
 /**
@@ -14,9 +14,18 @@ import { KanbanCard } from '../../models/KanbanCard.model';
 export class KanbancardComponent {
 
   @Input() card: KanbanCard;
+  @Output() move : EventEmitter<any>;
 
   constructor() {
     console.log('Hello KanbancardComponent Component');
+    this.move = new EventEmitter<any>();
   }
 
+  onForwardClicked(){
+    this.move.emit({card: this.card, shift: 1});
+  }
+
+  onBackwardClicked(){
+    this.move.emit({card: this.card, shift: -1});
+  }
 }
