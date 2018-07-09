@@ -15,4 +15,11 @@
   <ion-list *ngFor="let board of boards">
     <li (click)="onBoardSelect(board)">{{board.title}}</li>
   </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab><ion-icon name="add"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

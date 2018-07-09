@@ -7,9 +7,12 @@ import { KanbancolumnComponent } from './kanbancolumn/kanbancolumn';
 import { KanbanboardComponent } from './kanbanboard/kanbanboard';
 
 @NgModule({
-	declarations: [KanbancardComponent,
-    KanbancolumnComponent,
-    KanbanboardComponent],
+    declarations: 
+    [
+        KanbancardComponent,
+        KanbancolumnComponent,
+        KanbanboardComponent
+    ],
 	imports: [
         BrowserModule,
         IonicModule.forRoot(ComponentsModule)
