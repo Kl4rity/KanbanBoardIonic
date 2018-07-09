@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { BoardPage } from '../../pages/board/board';
+import { ModalController } from 'ionic-angular';
+import { AddBoardPage } from '../add-board/add-board';
+
 
 /**
  * Generated class for the WelcomePage page.
@@ -20,7 +23,7 @@ export class WelcomePage {
 
   public boards:Array<KanbanBoard>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public boardsprovider: BoardsdataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public boardsprovider: BoardsdataProvider, public modalCtrl: ModalController) {
 
   }
 
@@ -30,5 +33,10 @@ export class WelcomePage {
 
   onBoardSelect(board:KanbanBoard){
     this.navCtrl.push(BoardPage, {"board": board});
+  }
+
+  onAdd(){
+    const modal = this.modalCtrl.create(AddBoardPage);
+    modal.present();
   }
 }
