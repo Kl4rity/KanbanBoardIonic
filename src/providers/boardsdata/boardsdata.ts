@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { Storage } from '@ionic/storage';
+import { KanbanCard } from '../../models/KanbanCard.model';
 
 @Injectable()
 export class BoardsdataProvider {
@@ -70,6 +71,18 @@ export class BoardsdataProvider {
 
   createCard(boardId: number, columnNumber: number, newCardTitle: string, timeEstimate: number, cardContent: string){
     this.boards[boardId].columns[columnNumber].addNewCard(newCardTitle, timeEstimate, cardContent);
+    this.writeToDataBase();
+  }
+
+  editCard(boardId: number, columnNumber: number, currentCard: KanbanCard, newCardTitle: string, timeEstimate: number, cardContent: string){
+    let indexOfOldCard = this.boards[boardId].columns[columnNumber].cards.indexOf(currentCard);
+    this.boards[boardId].columns[columnNumber].cards[indexOfOldCard] = new KanbanCard(newCardTitle ,timeEstimate, cardContent);
+    this.writeToDataBase();
+  }
+
+  deleteCard(boardId: number, columnNumber: number, cardToBeDeleted: KanbanCard){
+    let indexOfCard = this.boards[boardId].columns[columnNumber].cards.indexOf(cardToBeDeleted);
+    this.boards[boardId].columns[columnNumber].cards.splice(indexOfCard, 1);
     this.writeToDataBase();
   }
 
