@@ -1,9 +1,9 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>{{board.title}}</ion-title>
+        <ion-title>{{this.columnTitle}}</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <kanbanboard [board] = "board" ></kanbanboard>
+  <kanbanboard [board] = "board" (columnChange)=onColumnChange($event)></kanbanboard>
 </ion-content>
