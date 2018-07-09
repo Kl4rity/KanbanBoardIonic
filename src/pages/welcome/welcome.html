@@ -12,7 +12,7 @@
 
 
 <ion-content padding>
-  <ion-list *ngFor="let board of boards">
+  <ion-list *ngFor="let board of boards" reorder="true">
     <li (click)="onBoardSelect(board)">{{board.title}}</li>
   </ion-list>
 

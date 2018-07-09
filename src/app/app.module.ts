@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddBoardPage } from '../pages/add-board/add-board';
 import { AddcolumnPage } from '../pages/addcolumn/addcolumn';
 import { AddCardPage } from '../pages/add-card/add-card';
+import { EditCardPage } from '../pages/edit-card/edit-card';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AddCardPage } from '../pages/add-card/add-card';
     WelcomePage,
     AddBoardPage,
     AddcolumnPage,
-    AddCardPage
+    AddCardPage,
+    EditCardPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import { AddCardPage } from '../pages/add-card/add-card';
     WelcomePage,
     AddBoardPage,
     AddcolumnPage,
-    AddCardPage
+    AddCardPage,
+    EditCardPage
     ],
   providers: [
     StatusBar,
