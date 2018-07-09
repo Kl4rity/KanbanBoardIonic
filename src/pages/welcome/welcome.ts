@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, reorderArray } from 'ionic-angular';
 import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { BoardPage } from '../../pages/board/board';
@@ -38,5 +38,10 @@ export class WelcomePage {
   onAdd(){
     const modal = this.modalCtrl.create(AddBoardPage);
     modal.present();
+  }
+
+  reorderItems(indexes) {
+    this.boardsprovider.boards = reorderArray(this.boardsprovider.boards, indexes);
+    this.boardsprovider.writeToDataBase();
   }
 }

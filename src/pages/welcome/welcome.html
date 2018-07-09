@@ -11,9 +11,9 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-list *ngFor="let board of boards" reorder="true">
-    <li (click)="onBoardSelect(board)">{{board.title}}</li>
+<ion-content>
+  <ion-list reorder="true" (ionItemReorder)="reorderItems($event)">
+    <ion-item *ngFor="let board of boards" (click)="onBoardSelect(board)">{{board.title}}</ion-item>
   </ion-list>
 
   <ion-fab right bottom>
