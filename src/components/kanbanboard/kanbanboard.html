@@ -1,8 +1,11 @@
 <!-- Generated template for the KanbanboardComponent component -->
 
-<ion-slides effect = "slide">
+<ion-slides effect = "slide" (ionSlideDidChange)="slideChanged()">
   <ion-slide *ngFor="let column of board.columns">
-      <kanbancolumn [column] = column (move)=moveCard($event) ></kanbancolumn>
+      <kanbancolumn 
+      [column] = column 
+      [board] = board
+      (move)=moveCard($event) ></kanbancolumn>
   </ion-slide>
 </ion-slides>
 

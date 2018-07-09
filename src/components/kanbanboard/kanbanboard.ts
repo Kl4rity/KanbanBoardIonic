@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { ToastController, ModalController, Slides } from 'ionic-angular';
 import { AddcolumnPage } from '../../pages/addcolumn/addcolumn';
@@ -19,11 +19,13 @@ export class KanbanboardComponent {
 
   @Input() board: KanbanBoard;
   @ViewChild(Slides) slides: Slides;
+  @Output() columnChange: EventEmitter<any>;
+
   text: string;
 
   constructor(public toastCtrl: ToastController, public modalCtrl: ModalController) {
     console.log('Hello KanbanboardComponent Component');
-    this.text = 'Hello World';
+    this.columnChange = new EventEmitter<any>();
   }
 
   moveCard($event){
@@ -53,5 +55,10 @@ export class KanbanboardComponent {
   onAddCard(currentBoard: KanbanBoard){
     const modal = this.modalCtrl.create(AddCardPage, {board: currentBoard, column: this.slides.getActiveIndex()});
     modal.present();
+  }
+
+  slideChanged(){
+    console.log("slideChanged() :" + this.slides.getActiveIndex());
+    this.columnChange.emit({columnIndex: this.slides.getActiveIndex()});
   }
 }
