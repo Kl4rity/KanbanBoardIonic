@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
-import { ToastController } from 'ionic-angular';
+import { ToastController, ModalController, Slides } from 'ionic-angular';
+import { AddcolumnPage } from '../../pages/addcolumn/addcolumn';
+import { AddCardPage } from '../../pages/add-card/add-card';
 
 
 /**
@@ -16,9 +18,10 @@ import { ToastController } from 'ionic-angular';
 export class KanbanboardComponent {
 
   @Input() board: KanbanBoard;
+  @ViewChild(Slides) slides: Slides;
   text: string;
 
-  constructor(public toastCtrl: ToastController) {
+  constructor(public toastCtrl: ToastController, public modalCtrl: ModalController) {
     console.log('Hello KanbanboardComponent Component');
     this.text = 'Hello World';
   }
@@ -40,5 +43,15 @@ export class KanbanboardComponent {
     });
 
     toast.present(toast);
+  }
+
+  onAddColumn(currentBoard: KanbanBoard){
+    const modal = this.modalCtrl.create(AddcolumnPage, {board: currentBoard});
+    modal.present();
+  }
+
+  onAddCard(currentBoard: KanbanBoard){
+    const modal = this.modalCtrl.create(AddCardPage, {board: currentBoard, column: this.slides.getActiveIndex()});
+    modal.present();
   }
 }
