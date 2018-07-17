@@ -20,8 +20,12 @@ kanbancolumn {
         padding: 0px;
     }
 
-    .item-ios.item-block .item-inner {
+    .item-ios .item-block .item-inner {
         padding-right: 0px;
+    }
+
+    .list-ios .item-block .item-inner {
+        border: 0px;
     }
 
     .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
