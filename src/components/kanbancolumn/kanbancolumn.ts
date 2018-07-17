@@ -1,9 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { KanbanColumn } from '../../models/KanbanColumn.model';
 import { KanbanCard } from '../../models/KanbanCard.model';
-import { ModalController } from 'ionic-angular';
+import { ModalController, reorderArray } from 'ionic-angular';
 import { EditCardPage } from '../../pages/edit-card/edit-card';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
+import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata';
 
 /**
  * Generated class for the KanbancolumnComponent component.
@@ -20,7 +21,7 @@ export class KanbancolumnComponent {
   @Input() board: KanbanBoard;
   @Output() move: EventEmitter<any>;
 
-  constructor(public modalCtrl: ModalController) {
+  constructor(public modalCtrl: ModalController, public boardsprovider: BoardsdataProvider) {
     console.log('Hello KanbancolumnComponent Component');
     this.move = new EventEmitter<any>();
   }
@@ -34,5 +35,10 @@ export class KanbancolumnComponent {
   onCardPress(card: KanbanCard){
     const modal = this.modalCtrl.create(EditCardPage ,{currentCard: card, currentBoard: this.board, column: this.board.columns.indexOf(this.column)});
     modal.present();
+  }
+
+  reorderItems(indexes) {
+    this.boardsprovider.boards[this.boardsprovider.boards.indexOf(this.board)].columns[this.board.columns.indexOf(this.column)].cards = reorderArray(this.boardsprovider.boards[this.boardsprovider.boards.indexOf(this.board)].columns[this.board.columns.indexOf(this.column)].cards, indexes);
+    this.boardsprovider.writeToDataBase();
   }
 }

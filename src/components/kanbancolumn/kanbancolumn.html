@@ -1,4 +1,6 @@
 <!-- Generated template for the KanbancolumnComponent component -->
-<div *ngFor="let card of column.cards">
-  <kanbancard [card]="card" (move)="log($event)" (press)=onCardPress(card)></kanbancard>
-</div>
+<ion-list reorder="true" (ionItemReorder)="reorderItems($event)">
+  <ion-item *ngFor="let card of column.cards">
+    <kanbancard [card]="card" (move)="log($event)" (press)=onCardPress(card)></kanbancard>
+  </ion-item>
+</ion-list>
