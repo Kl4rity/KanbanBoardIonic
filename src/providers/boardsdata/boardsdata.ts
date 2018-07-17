@@ -11,25 +11,30 @@ export class BoardsdataProvider {
 
   constructor(public http: HttpClient, private storage: Storage) {
     console.log('Hello BoardsdataProvider Provider');
-    storage.get("boards").then((boards)=>{
+    this.initializeLoadingBoardsFromStorage();
+  }
+
+  
+  initializeLoadingBoardsFromStorage(){
+    this.storage.get("boards").then((boards)=>{
       console.log(boards);
-      if (boards === "undefined" || boards === null){
+      if (boards == null){
         this.boards = new Array<KanbanBoard>();
       } else {
         this.readBoardsFromDataBase(JSON.parse(boards));
       }
     });
   }
-
+  
   readBoardsFromDataBase(boards){
-      boards.forEach((board, boardIndex)=>{
-        this.readBoardFromDataBase(board, boardIndex);
-      });
+    boards.forEach((board, boardIndex)=>{
+      this.readBoardFromDataBase(board, boardIndex);
+    });
   }
 
   readBoardFromDataBase(board, boardIndex){
     this.boards.push(new KanbanBoard(board.title));
-      if(board.columns === "undefined" || board.columns === null){
+      if(board.columns == null){
         console.log("No columns for board " + board.title);
       } else {
         board.columns.forEach((column, columnIndex)=>{
@@ -42,7 +47,7 @@ export class BoardsdataProvider {
 
     this.boards[boardIndex].addNewColumn(column.title);
 
-    if(column.cards === "undefined" || column.cards === null){
+    if(column.cards == null){
 
     } else {
       column.cards.forEach((card)=>{
@@ -62,11 +67,13 @@ export class BoardsdataProvider {
   createBoard(boardName : string){
     this.boards.push(new KanbanBoard(boardName));
     this.writeToDataBase();
+    this.reloadInCaseOfFirstBoard();
   }
 
   createColumn(boardId: number, columnName: string){
     this.boards[boardId].addNewColumn(columnName);
     this.writeToDataBase();
+    this.reloadInCaseOfFirstColumnOnBoard(boardId);
   }
 
   createCard(boardId: number, columnNumber: number, newCardTitle: string, timeEstimate: number, cardContent: string){
@@ -88,6 +95,18 @@ export class BoardsdataProvider {
 
   writeToDataBase(){
     this.storage.set("boards", JSON.stringify(this.boards));
+  }
+
+  reloadInCaseOfFirstBoard(){
+    if (this.boards.length === 1){
+      this.initializeLoadingBoardsFromStorage();
+    }
+  }
+
+  reloadInCaseOfFirstColumnOnBoard(boardId:number){
+    if(this.boards[boardId].columns.length === 1){
+      this.initializeLoadingBoardsFromStorage();
+    }
   }
 
   generateDummyData(){
