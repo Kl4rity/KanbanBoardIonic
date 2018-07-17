@@ -1,4 +1,31 @@
 kanbancolumn {
     // -webkit-overflow-scrolling: touch;
     overflow:scroll;
+
+    .reorder-visible ion-reorder {
+        position: absolute;
+        right:10%;
+        top: -25%;
+    }
+
+    .label {
+        margin: 0px;
+    }
+
+    .label-md {
+        margin: 0px;
+    }
+
+    .item-block {
+        padding: 0px;
+    }
+
+    .item-ios.item-block .item-inner {
+        padding-right: 0px;
+    }
+
+    .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
+        border-top: 0px;
+        border-bottom: 0px;
+    }
 }

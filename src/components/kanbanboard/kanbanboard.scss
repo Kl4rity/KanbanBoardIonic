@@ -5,4 +5,9 @@ kanbanboard {
         overflow-x: scroll;
         -webkit-overflow-scrolling: touch;
       }
+
+      .item-md.item-block .item-inner {
+        border: 0px;
+        padding: 0px;
+    }
 }
