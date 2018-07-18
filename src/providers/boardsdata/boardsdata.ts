@@ -101,7 +101,7 @@ export class BoardsdataProvider {
   deleteBoard(boardToBeDeleted: KanbanBoard){
     let indexOfBoardToBeDeleted = this.boards.indexOf(boardToBeDeleted);
     this.boards.splice(indexOfBoardToBeDeleted, 1);
-    this.writeToDataBase;
+    this.writeToDataBase();
   }
 
   writeToDataBase(){
