@@ -13,12 +13,12 @@
 
 <ion-content>
 
-  <ion-list *ngIf="boards.length === 0">
+  <ion-list no-lines *ngIf="boards.length === 0">
       <ion-item>No boards yet, create one!</ion-item>
   </ion-list>
 
 
-  <ion-list reorder="true" (ionItemReorder)="reorderItems($event)" *ngIf="boards.length > 0">
+  <ion-list no-lines reorder="true" (ionItemReorder)="reorderItems($event)" *ngIf="boards.length > 0">
     <ion-item *ngFor="let board of boards" (press)=onBoardPress(board) (click)="onBoardSelect(board)">{{board.title}}</ion-item>
   </ion-list>
 

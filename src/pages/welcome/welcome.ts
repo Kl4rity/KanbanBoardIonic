@@ -49,7 +49,6 @@ export class WelcomePage {
   }
 
   onBoardPress(board: KanbanBoard){
-    const modal = this.modalCtrl.create(EditBoardPage, {currentBoard: board});
-    modal.present();
+    this.navCtrl.push(EditBoardPage, {currentBoard: board});
   }
 }

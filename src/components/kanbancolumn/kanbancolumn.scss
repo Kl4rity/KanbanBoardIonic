@@ -24,15 +24,6 @@ kanbancolumn {
         padding-right: 0px;
     }
 
-    .list-ios .item-block .item-inner {
-        border: 0px;
-    }
-
-    .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
-        border-top: 0px;
-        border-bottom: 0px;
-    }
-
     ion-label{
         white-space: normal;
     }
