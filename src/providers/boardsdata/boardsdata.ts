@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { Storage } from '@ionic/storage';
 import { KanbanCard } from '../../models/KanbanCard.model';
+import { KanbanColumn } from '../../models/KanbanColumn.model';
 
 @Injectable()
 export class BoardsdataProvider {
@@ -88,6 +89,19 @@ export class BoardsdataProvider {
   deleteCard(boardId: number, columnNumber: number, cardToBeDeleted: KanbanCard){
     let indexOfCard = this.boards[boardId].columns[columnNumber].cards.indexOf(cardToBeDeleted);
     this.boards[boardId].columns[columnNumber].cards.splice(indexOfCard, 1);
+    this.writeToDataBase();
+  }
+
+  editColumn(boardId: number, columnToBeEdited: KanbanColumn, newTitle: string){
+    let indexOfColumn = this.boards[boardId].columns.indexOf(columnToBeEdited);
+    columnToBeEdited.title = newTitle;
+    this.boards[boardId].columns[indexOfColumn] = columnToBeEdited;
+    this.writeToDataBase();
+  }
+
+  deleteColumn(boardId: number, columnToBeDeleted){
+    let indexOfColumToBeDeleted = this.boards[boardId].columns.indexOf(columnToBeDeleted);
+    this.boards[boardId].columns.splice(indexOfColumToBeDeleted, 1);
     this.writeToDataBase();
   }
 
