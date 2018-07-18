@@ -24,10 +24,12 @@ export class WelcomePage {
   public boards:Array<KanbanBoard>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public boardsprovider: BoardsdataProvider, public modalCtrl: ModalController) {
+    this.boards = this.boardsprovider.getBoards();
 
   }
 
-  ionViewDidLoad() {
+  ngAfterContentChecked(){
+    console.log("After Content Checked.");
     this.boards = this.boardsprovider.getBoards();
   }
 
