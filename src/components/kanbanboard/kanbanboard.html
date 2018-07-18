@@ -1,6 +1,6 @@
 <!-- Generated template for the KanbanboardComponent component -->
 
-<ion-slides effect = "slide" (ionSlideDidChange)="slideChanged()">
+<ion-slides effect = "slide" (ionSlideDidChange)="slideChanged()" *ngIf="board.columns.length > 0">
   <ion-slide *ngFor="let column of board.columns">
       <kanbancolumn 
       [column] = column 
@@ -8,6 +8,13 @@
       (move)=moveCard($event) ></kanbancolumn>
   </ion-slide>
 </ion-slides>
+
+<ion-slides effect = "slide" (ionSlideDidChange)="slideChanged()" *ngIf="board.columns.length == 0">
+  <ion-slide>
+      Hey, there are no columns yet, create your first one by clicking on the plus and choosing the option on the left!
+  </ion-slide>
+</ion-slides>
+
 
 <ion-fab right bottom>
   <button ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>

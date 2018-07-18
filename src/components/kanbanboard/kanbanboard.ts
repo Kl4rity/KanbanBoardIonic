@@ -24,11 +24,16 @@ export class KanbanboardComponent {
   text: string;
 
   constructor(public toastCtrl: ToastController, public modalCtrl: ModalController) {
-    console.log('Hello KanbanboardComponent Component');
     this.columnChange = new EventEmitter<any>();
   }
 
-  moveCard($event){
+  ngAfterContentChecked(){
+    if(this.board.columns.length === 1){
+      this.columnChange.emit({columnIndex: 0});
+    }
+  }
+
+    moveCard($event){
     // Actual moving of data done by the baordModel.
     let success: boolean = this.board.moveCardToColumn($event.card, $event.column, $event.shift);
     // Display a Toast message on failure.
