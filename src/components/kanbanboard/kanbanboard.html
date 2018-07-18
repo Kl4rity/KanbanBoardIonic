@@ -1,6 +1,6 @@
 <!-- Generated template for the KanbanboardComponent component -->
 
-<ion-slides effect = "slide" (ionSlideDidChange)="slideChanged()" *ngIf="board.columns.length > 0">
+<ion-slides effect = "slide" pager = "true" (ionSlideDidChange)="slideChanged()" *ngIf="board.columns.length > 0">
   <ion-slide *ngFor="let column of board.columns">
       <kanbancolumn 
       [column] = column 
@@ -11,7 +11,9 @@
 
 <ion-slides effect = "slide" (ionSlideDidChange)="slideChanged()" *ngIf="board.columns.length == 0">
   <ion-slide>
-      Hey, there are no columns yet, create your first one by clicking on the plus and choosing the option on the left!
+      <p padding=true>
+          Hey, there are no columns yet, create your first one by clicking on the plus and choosing the option on the left!
+      </p>
   </ion-slide>
 </ion-slides>
 
@@ -20,6 +22,6 @@
   <button ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
   <ion-fab-list side="left">
     <button ion-fab (click)=onAddCard(board)><ion-icon name="checkbox"></ion-icon></button>
-    <button ion-fab (click)=onAddColumn(board)><ion-icon name="book"></ion-icon></button>
+    <button ion-fab (click)=onAddColumn(board)><ion-icon name="filing"></ion-icon></button>
   </ion-fab-list>
 </ion-fab>
