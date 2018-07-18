@@ -7,10 +7,16 @@
     {{card.content}}
   </ion-card-content>
   <ion-row>
-      <ion-col col-6>
+      <ion-col col-5>
           <button ion-button clear small full (click)="onBackwardClicked()"><ion-icon name="arrow-back"></ion-icon></button>
         </ion-col>
-        <ion-col col-6>
+        <ion-col col-2>
+          <button ion-button clear small full>
+              {{card.timeEstimate}}
+              <ion-icon name="stopwatch" style="margin-left:10px;"></ion-icon>
+          </button>
+        </ion-col> 
+        <ion-col col-5>
           <button ion-button clear small full (click)="onForwardClicked()"><ion-icon name="arrow-forward"></ion-icon></button>
         </ion-col>
   </ion-row>
