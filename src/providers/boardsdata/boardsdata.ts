@@ -67,13 +67,11 @@ export class BoardsdataProvider {
   createBoard(boardName : string){
     this.boards.push(new KanbanBoard(boardName));
     this.writeToDataBase();
-    this.reloadInCaseOfFirstBoard();
   }
 
   createColumn(boardId: number, columnName: string){
     this.boards[boardId].addNewColumn(columnName);
     this.writeToDataBase();
-    this.reloadInCaseOfFirstColumnOnBoard(boardId);
   }
 
   createCard(boardId: number, columnNumber: number, newCardTitle: string, timeEstimate: number, cardContent: string){
@@ -93,19 +91,20 @@ export class BoardsdataProvider {
     this.writeToDataBase();
   }
 
+  editBoard(boardToBeEdited: KanbanBoard, newTitle: string){
+    let indexOfBoardToBeEdited = this.boards.indexOf(boardToBeEdited);
+    boardToBeEdited.title = newTitle;
+    this.boards[indexOfBoardToBeEdited] = boardToBeEdited;
+    this.writeToDataBase();
+  }
+
+  deleteBoard(boardToBeDeleted: KanbanBoard){
+    let indexOfBoardToBeDeleted = this.boards.indexOf(boardToBeDeleted);
+    this.boards.splice(indexOfBoardToBeDeleted, 1);
+    this.writeToDataBase;
+  }
+
   writeToDataBase(){
     this.storage.set("boards", JSON.stringify(this.boards));
-  }
-
-  reloadInCaseOfFirstBoard(){
-    // if (this.boards.length === 1){
-    //   this.initializeLoadingBoardsFromStorage();
-    // }
-  }
-
-  reloadInCaseOfFirstColumnOnBoard(boardId:number){
-    // if(this.boards[boardId].columns.length === 1){
-    //   this.initializeLoadingBoardsFromStorage();
-    // }
   }
 }
