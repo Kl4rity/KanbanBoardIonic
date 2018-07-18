@@ -26,7 +26,6 @@ export class ReorderColumnsPage {
               public boardsDataProvider: BoardsdataProvider,
               public modalCtrl: ModalController) {
     this.board = navParams.get("currentBoard");
-    console.log(this.board);
   }
 
   ionViewDidLoad() {
@@ -40,12 +39,11 @@ export class ReorderColumnsPage {
   }
 
   onBoardPress(column: KanbanColumn){
-    const modal = this.modalCtrl.create(EditColumnPage, {columnToBeEdited: column});
+    const modal = this.modalCtrl.create(EditColumnPage, {columnToBeEdited: column, currentBoard: this.board});
     modal.present();
   }
 
   dismiss(){
     this.navCtrl.pop();
   }
-
 }
