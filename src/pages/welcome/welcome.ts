@@ -5,6 +5,7 @@ import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { BoardPage } from '../../pages/board/board';
 import { ModalController } from 'ionic-angular';
 import { AddBoardPage } from '../add-board/add-board';
+import { EditBoardPage } from '../edit-board/edit-board';
 
 
 /**
@@ -45,5 +46,10 @@ export class WelcomePage {
   reorderItems(indexes) {
     this.boardsprovider.boards = reorderArray(this.boardsprovider.boards, indexes);
     this.boardsprovider.writeToDataBase();
+  }
+
+  onBoardPress(board: KanbanBoard){
+    const modal = this.modalCtrl.create(EditBoardPage, {currentBoard: board});
+    modal.present();
   }
 }

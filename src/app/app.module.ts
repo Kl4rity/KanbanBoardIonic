@@ -17,6 +17,7 @@ import { AddBoardPage } from '../pages/add-board/add-board';
 import { AddcolumnPage } from '../pages/addcolumn/addcolumn';
 import { AddCardPage } from '../pages/add-card/add-card';
 import { EditCardPage } from '../pages/edit-card/edit-card';
+import { EditBoardPage } from '../pages/edit-board/edit-board';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { EditCardPage } from '../pages/edit-card/edit-card';
     AddBoardPage,
     AddcolumnPage,
     AddCardPage,
-    EditCardPage
+    EditCardPage,
+    EditBoardPage
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,8 @@ import { EditCardPage } from '../pages/edit-card/edit-card';
     AddBoardPage,
     AddcolumnPage,
     AddCardPage,
-    EditCardPage
+    EditCardPage,
+    EditBoardPage
     ],
   providers: [
     StatusBar,
