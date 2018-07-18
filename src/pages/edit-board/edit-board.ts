@@ -21,7 +21,7 @@ export class EditBoardPage {
   currentBoard: KanbanBoard;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public boardsDataProvider: BoardsdataProvider) {
-    this.currentBoard = navParams.get("currentBoard");;
+    this.currentBoard = navParams.get("currentBoard");
   }
 
   ionViewDidLoad() {
