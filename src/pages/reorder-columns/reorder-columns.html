@@ -29,4 +29,7 @@
       <ion-item *ngFor="let column of board.columns" (press)="onBoardPress(column)">{{column.title}}</ion-item>
   </ion-list>
 
+  <ion-fab right bottom>
+    <button ion-fab (click)=onAddColumn(board)><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>

@@ -4,6 +4,7 @@ import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata';
 import { KanbanColumn } from '../../models/KanbanColumn.model';
 import { EditColumnPage } from '../edit-column/edit-column';
+import { AddcolumnPage } from '../addcolumn/addcolumn';
 
 /**
  * Generated class for the ReorderColumnsPage page.
@@ -36,6 +37,11 @@ export class ReorderColumnsPage {
 
   onBoardPress(column: KanbanColumn){
     const modal = this.modalCtrl.create(EditColumnPage, {columnToBeEdited: column, currentBoard: this.board});
+    modal.present();
+  }
+
+  onAddColumn(currentBoard: KanbanBoard){
+    const modal = this.modalCtrl.create(AddcolumnPage, {board: currentBoard});
     modal.present();
   }
 
