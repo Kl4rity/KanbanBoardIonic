@@ -22,7 +22,6 @@ export class KanbancolumnComponent {
   @Output() move: EventEmitter<any>;
 
   constructor(public modalCtrl: ModalController, public boardsprovider: BoardsdataProvider) {
-    console.log('Hello KanbancolumnComponent Component');
     this.move = new EventEmitter<any>();
   }
 

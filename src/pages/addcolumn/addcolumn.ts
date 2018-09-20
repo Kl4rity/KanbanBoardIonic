@@ -25,10 +25,6 @@ export class AddcolumnPage {
     this.currentBoard = navParams.get("board");
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddcolumnPage');
-  }
-
   ionViewWillEnter(){
     setInitialFocus(this.navCtrl, this.columnNameInput);
   }

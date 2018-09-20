@@ -17,7 +17,6 @@ export class KanbancardComponent {
   @Output() move : EventEmitter<any>;
 
   constructor() {
-    console.log('Hello KanbancardComponent Component');
     this.move = new EventEmitter<any>();
   }
 

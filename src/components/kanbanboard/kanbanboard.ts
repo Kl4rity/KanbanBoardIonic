@@ -23,7 +23,6 @@ export class KanbanboardComponent {
   @ViewChild(Slides) slides: Slides;
   @Output() columnChange: EventEmitter<any>;
 
-  text: string;
   private vibration:Vibration;
 
   constructor(public toastCtrl: ToastController, public modalCtrl: ModalController) {
@@ -46,21 +45,8 @@ export class KanbanboardComponent {
   let success: boolean = this.board.moveCardToColumn($event.card, $event.column, $event.shift);
   // Display a Toast message on failure.
   if(!success){
-      this.showToast("Cannot move Card off Board.");
-      if(isCordova()){
-        this.vibration.vibrate(500);
-      }
+      this.notifyCardCouldNotBeMoved();
     }
-  }
-
-  showToast(notification: string) {
-    let toast = this.toastCtrl.create({
-      message: notification,
-      duration: 2000,
-      position: "top"
-    });
-
-    toast.present(toast);
   }
 
   // Why is this on a component? Take it out of here.
@@ -75,8 +61,24 @@ export class KanbanboardComponent {
   }
 
   slideChanged(){
-    // DEBUG
-    // console.log("slideChanged() :" + this.slides.getActiveIndex());
+    // DEBUG console.log("slideChanged() :" + this.slides.getActiveIndex());
     this.columnChange.emit({columnIndex: this.slides.getActiveIndex()});
+  }
+
+  // Making it into a helper function is not as easy as it seems | a service is what is already offered by the framework. Stays here for now.
+  private showToast(notification: string) {
+    let toast = this.toastCtrl.create({
+      message: notification,
+      duration: 2000,
+      position: "top"
+    });
+
+    toast.present(toast);
+  }
+  private notifyCardCouldNotBeMoved(){
+    this.showToast("Cannot move Card off Board.");
+    if(isCordova()){
+      this.vibration.vibrate(500);
+    }
   }
 }

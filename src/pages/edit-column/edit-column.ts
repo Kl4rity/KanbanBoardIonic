@@ -50,5 +50,4 @@ export class EditColumnPage {
   dismiss(){
     this.navCtrl.pop();
   }
-
 }
