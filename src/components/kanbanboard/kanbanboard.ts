@@ -3,6 +3,8 @@ import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { ToastController, ModalController, Slides } from 'ionic-angular';
 import { AddcolumnPage } from '../../pages/addcolumn/addcolumn';
 import { AddCardPage } from '../../pages/add-card/add-card';
+import { Vibration } from '@ionic-native/vibration';
+import { Platform } from 'ionic-angular';
 
 
 /**
@@ -22,9 +24,15 @@ export class KanbanboardComponent {
   @Output() columnChange: EventEmitter<any>;
 
   text: string;
+  private vibration:Vibration;
 
-  constructor(public toastCtrl: ToastController, public modalCtrl: ModalController) {
+  constructor(public toastCtrl: ToastController, public modalCtrl: ModalController, private platform:Platform) {
+    
     this.columnChange = new EventEmitter<any>();
+
+    if(this.platform.is('cordova')){
+      this.vibration = new Vibration();
+    }
   }
 
   ngAfterContentChecked(){
@@ -39,6 +47,9 @@ export class KanbanboardComponent {
     // Display a Toast message on failure.
     if(!success){
         this.showToast("Cannot move Card off Board.");
+        if(this.platform.is('cordova')){
+          this.vibration.vibrate(500);
+        }
       }
   }
 
