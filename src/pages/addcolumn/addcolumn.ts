@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
-import { setInitialFocus } from '../shared/SetInitialFocus.helper';
+import { setInitialFocus } from '../../shared/SetInitialFocus.helper';
 
 /**
  * Generated class for the AddcolumnPage page.

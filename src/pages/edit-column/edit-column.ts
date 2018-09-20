@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { KanbanColumn } from '../../models/KanbanColumn.model';
 import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
-import { setInitialFocus } from '../shared/SetInitialFocus.helper';
+import { setInitialFocus } from '../../shared/SetInitialFocus.helper';
 
 /**
  * Generated class for the EditColumnPage page.
@@ -34,7 +34,6 @@ export class EditColumnPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad EditColumnPage');
     this.columnTitleInput.value = this.currentColumn.title;
   }
 
