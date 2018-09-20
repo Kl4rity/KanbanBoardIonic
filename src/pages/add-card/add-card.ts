@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata';
+import { setInitialFocus } from '../shared/SetInitialFocus.helper';
 
 /**
  * Generated class for the AddCardPage page.
@@ -29,8 +30,8 @@ export class AddCardPage {
     this.columnNumber = navParams.get("column");
   }
 
-  ionViewDidLoad() {
-
+  ionViewWillEnter(){
+    setInitialFocus(this.navCtrl, this.cardTitleInput);
   }
 
   onInputEnterPressed(cardTitle: string, cardContent: string, cardTime: number){

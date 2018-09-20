@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata';
+import { setInitialFocus } from '../shared/SetInitialFocus.helper';
 
 /**
  * Generated class for the AddBoardPage page.
@@ -19,19 +20,13 @@ export class AddBoardPage {
   @ViewChild('boardNameInput') boardNameInput;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public boardsDataProvider: BoardsdataProvider) {
-    // this.boardNameInput.setFocus();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddBoardPage');
+  ionViewWillEnter(){
+    setInitialFocus(this.navCtrl, this.boardNameInput);
   }
-
-  // ngAfterViewChecked()	{
-  //   this.boardNameInput.setFocus();
-  // }
 
   onInputEnterPressed(boardName: string){
-    console.log(boardName);
     this.boardsDataProvider.createBoard(boardName);
     this.navCtrl.pop();
   }

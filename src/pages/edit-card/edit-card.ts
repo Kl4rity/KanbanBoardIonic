@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata';
 import { KanbanCard } from '../../models/KanbanCard.model';
+import { setInitialFocus } from '../shared/SetInitialFocus.helper';
 
 /**
  * Generated class for the EditCardPage page.
@@ -31,6 +32,10 @@ export class EditCardPage {
     this.currentBoard = navParams.get("currentBoard");
     this.columnNumber = navParams.get("column");
     this.card = navParams.get("currentCard");
+  }
+
+  ionViewWillEnter(){
+    setInitialFocus(this.navCtrl, this.cardTitleInput);
   }
 
   ionViewDidLoad() {

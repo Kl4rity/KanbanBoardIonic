@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata';
+import { setInitialFocus } from '../shared/SetInitialFocus.helper';
 
 /**
  * Generated class for the EditBoardPage page.
@@ -26,6 +27,10 @@ export class EditBoardPage {
 
   ionViewDidLoad() {
     this.boardTitleInput.value = this.currentBoard.title;
+  }
+
+  ionViewWillEnter(){
+    setInitialFocus(this.navCtrl, this.boardTitleInput);
   }
 
   onInputEnterPressed(boardTitle: string){
