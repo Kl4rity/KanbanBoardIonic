@@ -28,10 +28,6 @@ export class ReorderColumnsPage {
     this.board = navParams.get("currentBoard");
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ReorderColumnsPage');
-  }
-
   reorderItems(indexes) {
     let indexOfBoard = this.boardsDataProvider.boards.indexOf(this.board);
     this.boardsDataProvider.boards[indexOfBoard].columns = reorderArray(this.boardsDataProvider.boards[indexOfBoard].columns, indexes);

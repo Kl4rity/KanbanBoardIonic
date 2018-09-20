@@ -30,7 +30,6 @@ export class WelcomePage {
   }
 
   ngAfterContentChecked(){
-    console.log("After Content Checked.");
     this.boards = this.boardsprovider.getBoards();
   }
 
