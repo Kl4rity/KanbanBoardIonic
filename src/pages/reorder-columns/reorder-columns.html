@@ -19,13 +19,14 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content padding>
 
   <ion-list no-lines *ngIf="!board">
       <ion-item>No columns yet, create one!</ion-item>
   </ion-list>
 
-  <ion-list no-lines reorder="true" (ionItemReorder)="reorderItems($event)" *ngIf="board">
+  <ion-list no-lines reorder="true" (ionItemReorder)="reorderItems($event)" 
+  *ngIf="board">
       <ion-item *ngFor="let column of board.columns" (press)="onBoardPress(column)">{{column.title}}</ion-item>
   </ion-list>
 
