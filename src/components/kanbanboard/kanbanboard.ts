@@ -49,12 +49,6 @@ export class KanbanboardComponent {
     }
   }
 
-  // Why is this on a component? Take it out of here.
-  onAddColumn(currentBoard: KanbanBoard){
-    const modal = this.modalCtrl.create(AddcolumnPage, {board: currentBoard});
-    modal.present();
-  }
-
   onAddCard(currentBoard: KanbanBoard){
     const modal = this.modalCtrl.create(AddCardPage, {board: currentBoard, column: this.slides.getActiveIndex()});
     modal.present();
