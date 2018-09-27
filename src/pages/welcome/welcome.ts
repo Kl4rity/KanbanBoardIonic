@@ -6,6 +6,8 @@ import { BoardPage } from '../../pages/board/board';
 import { ModalController } from 'ionic-angular';
 import { AddBoardPage } from '../add-board/add-board';
 import { EditBoardPage } from '../edit-board/edit-board';
+import { AuthProvider } from '../../providers/authentication/auth.provider';
+import { SigninPage } from '../signin/signin';
 
 
 /**
@@ -24,7 +26,13 @@ export class WelcomePage {
 
   public boards:Array<KanbanBoard>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public boardsprovider: BoardsdataProvider, public modalCtrl: ModalController) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public boardsprovider: BoardsdataProvider,
+    public modalCtrl: ModalController,
+    public auth: AuthProvider
+    ) {
     this.boards = this.boardsprovider.getBoards();
 
   }
@@ -49,5 +57,13 @@ export class WelcomePage {
 
   onBoardPress(board: KanbanBoard){
     this.navCtrl.push(EditBoardPage, {currentBoard: board});
+  }
+
+  ionViewDidEnter(){
+    this.auth.user.subscribe((user)=>{
+      if(user === null){
+        this.navCtrl.push(SigninPage);
+      }
+    });
   }
 }
