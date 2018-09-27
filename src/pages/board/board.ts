@@ -14,7 +14,7 @@ import { isCordova } from '../../shared/isCordova.helper';
 export class BoardPage {
 
   public board: KanbanBoard;
-  private columnTitle : string;
+  public columnTitle : string;
   private vibration:Vibration;
 
   constructor(public navCtrl: NavController, public navParam: NavParams, public modalCtrl: ModalController) {
