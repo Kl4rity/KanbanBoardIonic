@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, reorderArray } from 'ionic-angular';
-import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata';
+import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata.provider';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { BoardPage } from '../../pages/board/board';
 import { ModalController } from 'ionic-angular';
@@ -8,14 +8,6 @@ import { AddBoardPage } from '../add-board/add-board';
 import { EditBoardPage } from '../edit-board/edit-board';
 import { AuthProvider } from '../../providers/authentication/auth.provider';
 import { SigninPage } from '../signin/signin';
-
-
-/**
- * Generated class for the WelcomePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({

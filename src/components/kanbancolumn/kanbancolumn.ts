@@ -4,7 +4,7 @@ import { KanbanCard } from '../../models/KanbanCard.model';
 import { ModalController, reorderArray } from 'ionic-angular';
 import { EditCardPage } from '../../pages/edit-card/edit-card';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
-import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata';
+import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata.provider';
 
 /**
  * Generated class for the KanbancolumnComponent component.

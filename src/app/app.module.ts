@@ -11,7 +11,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ComponentsModule } from '../components/components.module';
 import { WelcomePage } from '../pages/welcome/welcome';
-import { BoardsdataProvider } from '../providers/boardsdata/boardsdata';
+import { BoardsdataProvider } from '../providers/boardsdata/boardsdata.provider';
 import { HttpClientModule } from '@angular/common/http';
 import { AddBoardPage } from '../pages/add-board/add-board';
 import { AddcolumnPage } from '../pages/addcolumn/addcolumn';

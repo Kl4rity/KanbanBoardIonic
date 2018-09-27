@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, reorderArray, ModalController } from 'ionic-angular';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
-import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata';
+import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata.provider';
 import { KanbanColumn } from '../../models/KanbanColumn.model';
 import { EditColumnPage } from '../edit-column/edit-column';
 import { AddcolumnPage } from '../addcolumn/addcolumn';
