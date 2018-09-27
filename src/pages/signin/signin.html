@@ -1,0 +1,60 @@
+<!--
+  Generated template for the SigninPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title [hidden]="!this.loginVisible">Login</ion-title>
+    <ion-title [hidden]="this.loginVisible">Create Account</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <div [hidden]="!this.loginVisible">
+      <ion-item>
+        <ion-label stacked>E-Mail</ion-label>
+        <ion-input #loginEmailInput (keyup.enter)="this.loginPasswordInput.setFocus()" type="email" #first [(ngModel)]="this.loginEmail"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Password</ion-label>
+        <ion-input #loginPasswordInput (keyup.enter)="this.onSignInButton()" type="password" [(ngModel)]="this.loginPassword"></ion-input>
+      </ion-item>
+
+      <br>
+      <button ion-button block (click)="onSignInButton()">Log In</button>
+      <br>
+
+      <div class="switchLogin">
+        <a (click)="toggleLoginCreateAccount()">No account yet?</a>
+      </div>
+    </div>
+
+    <div [hidden]="this.loginVisible">
+      <ion-item>
+        <ion-label stacked>E-Mail</ion-label>
+        <ion-input #createEmailInput (keyup.enter)="this.createPasswordInput.setFocus()" type="email" [(ngModel)]="this.createEmail"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Password</ion-label>
+        <ion-input #createPasswordInput (keyup.enter)="this.createPasswordRepeatInput.setFocus()" type="password" [(ngModel)]="this.createPassword"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Repeat Password</ion-label>
+        <ion-input #createPasswordRepeatInput (keyup.enter)="this.onCreateAccountButton()" type="password" [(ngModel)]="this.createPasswordRepeat"></ion-input>
+      </ion-item>
+      <br>
+      <div>
+        <button ion-button block (click)="onCreateAccountButton()">Create new Account</button>
+      </div>
+      <br>
+      <div class="switchLogin">
+        <a (click)="toggleLoginCreateAccount()">Already have an account? Go back to signing in.</a>
+      </div>
+    </div>
+
+  </ion-list>
+</ion-content>
