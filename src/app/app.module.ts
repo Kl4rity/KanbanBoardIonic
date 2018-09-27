@@ -21,6 +21,13 @@ import { EditBoardPage } from '../pages/edit-board/edit-board';
 import { ReorderColumnsPage } from '../pages/reorder-columns/reorder-columns';
 import { EditColumnPage } from '../pages/edit-column/edit-column';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { fireBaseConfig } from '../secrets/firebase.secret';
+import { AuthProvider } from '../providers/authentication/auth.provider';
+import { SigninPage } from '../pages/signin/signin';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -32,14 +39,18 @@ import { EditColumnPage } from '../pages/edit-column/edit-column';
     EditCardPage,
     EditBoardPage,
     ReorderColumnsPage,
-    EditColumnPage
+    EditColumnPage,
+    SigninPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     ComponentsModule,
     HttpClientModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(fireBaseConfig),
+    AngularFireAuthModule,
+    FormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -52,13 +63,16 @@ import { EditColumnPage } from '../pages/edit-column/edit-column';
     EditCardPage,
     EditBoardPage,
     ReorderColumnsPage,
-    EditColumnPage
+    EditColumnPage,
+    SigninPage
     ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    BoardsdataProvider
+    BoardsdataProvider,
+    AuthProvider,
+    AngularFireAuth
   ]
 })
 export class AppModule {}
