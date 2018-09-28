@@ -14,6 +14,7 @@ import { AuthProvider } from '../authentication/auth.provider';
 export class BoardsdataProvider {
   public boards = new Array<KanbanBoard>();
   public boards$: BehaviorSubject<KanbanBoard[]>;
+  public uid: string;
 
   constructor(
     public http: HttpClient,
@@ -41,8 +42,8 @@ export class BoardsdataProvider {
 
       if(user !== null && user.uid){
         // this.afdb.object('/users/'+ user.uid + '/boards').valueChanges().map((boards:Object)=>{
-          this.afdb.object('/users/development/boards').valueChanges().map((boards:Object)=>{
-
+          this.afdb.object('/users/'+ user.uid +'/boards').valueChanges().map((boards:Object)=>{
+          this.uid = user.uid;
           if(boards == null){
             this.boards$.next(new Array<KanbanBoard>());
           }
@@ -99,6 +100,8 @@ export class BoardsdataProvider {
   }
 
   editBoard(boardId: string, newTitle: string){
+    console.log("Index of Boards:");
+    console.log(this.boardIndexForBoardId(boardId, this.boards));
     let indexOfBoardToBeEdited = this.boardIndexForBoardId(boardId, this.boards);
     this.boards[indexOfBoardToBeEdited].title = newTitle;
 
@@ -114,6 +117,8 @@ export class BoardsdataProvider {
 
   // CUD for COLUMNS
   createColumn(boardId: string, columnName: string){
+    console.log("createColumn()->boardIndex:");
+    console.log(this.boardIndexForBoardId(boardId, this.boards));
     let boardIndex = this.boardIndexForBoardId(boardId, this.boards);
     this.boards[boardIndex].addNewColumn(columnName);
 
@@ -193,32 +198,35 @@ export class BoardsdataProvider {
   // Utility functions
 
   boardIndexForBoardId(boardId: string, boardList: Array<KanbanBoard>):number{
+    let indexOfId = -1;
     boardList.forEach((value, index)=>{
       if(value.id === boardId){
-        return index;
+        indexOfId = index;
       }});
-      return -1;
+      return indexOfId;
   }
 
   columnIndexForColumnId(columnId: string, columnList: Array<KanbanColumn>):number{
+    let indexOfId = -1;
     columnList.forEach((value, index)=>{
       if(value.id === columnId){
-         return index;
+        indexOfId = index;
       }
     });
-    return -1;
+    return indexOfId;
   }
 
   cardIndexForCardId(cardId: string, cardList: Array<KanbanCard>):number{
+    let indexOfId = -1;
     cardList.forEach((value, index)=>{
       if(value.id === cardId){
-        return index;
+        indexOfId = index;
       }
     });
-    return -1;
+    return indexOfId;
   }
 
   writeToDataBase(){
-    this.afdb.object("/users/development/boards").set(this.boards);
+    this.afdb.object('/users/'+ this.uid +'/boards').set(this.boards);
   }
 }
