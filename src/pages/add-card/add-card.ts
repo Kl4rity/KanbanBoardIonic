@@ -27,6 +27,8 @@ export class AddCardPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public boardsDataProvider: BoardsdataProvider) {
     this.currentBoard = navParams.get("board");
+    console.log("add-card navParams - board");
+    console.log(this.currentBoard);
     this.columnNumber = navParams.get("column");
   }
 
@@ -35,6 +37,8 @@ export class AddCardPage {
   }
 
   onInputEnterPressed(cardTitle: string, cardContent: string, cardTime: number){
+    console.log("onInputEnterPressed() board:");
+    console.log(this.currentBoard);
     this.boardsDataProvider.createCard(this.currentBoard.id, this.currentBoard.columns[this.columnNumber].id, cardTitle, cardTime, cardContent);
     this.navCtrl.pop();
   }

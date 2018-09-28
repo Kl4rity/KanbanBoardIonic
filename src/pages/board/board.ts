@@ -4,6 +4,7 @@ import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { ReorderColumnsPage } from '../reorder-columns/reorder-columns';
 import { Vibration } from '@ionic-native/vibration';
 import { isCordova } from '../../shared/isCordova.helper';
+import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata.provider';
 
 
 @Component({
@@ -16,11 +17,20 @@ export class BoardPage {
   public board: KanbanBoard;
   public columnTitle : string;
   private vibration:Vibration;
+  private boardId: string;
 
-  constructor(public navCtrl: NavController, public navParam: NavParams, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParam: NavParams, public modalCtrl: ModalController, private boardsdataProvider: BoardsdataProvider) {
     
     this.board = navParam.get("board");
-    console.log(this.board);
+    this.boardId = this.board.id;
+
+    this.boardsdataProvider.boards$.subscribe((newData)=>{
+      newData.forEach((board)=>{
+        if(board.id == this.boardId){
+          this.board = board;
+        }
+      });
+    });
 
     if(isCordova()){
       this.vibration = new Vibration();

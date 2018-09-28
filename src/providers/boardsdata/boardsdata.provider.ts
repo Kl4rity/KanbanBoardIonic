@@ -86,7 +86,7 @@ export class BoardsdataProvider {
       let tempCard;
       if(cards.hasOwnProperty(cardsKey)){
         let card = cards[cardsKey];
-        tempCard = new KanbanCard(card.title, card.timeEstimate, card.text, card.id);
+        tempCard = new KanbanCard(card.title, card.timeEstimate, card.content, card.id);
       }
       newKanbanCards.push(tempCard);
     }
@@ -126,7 +126,6 @@ export class BoardsdataProvider {
   }
 
   editColumn(boardId: string, idOfColumnToBeEdited: string, newTitle: string){
-    
     let boardIndex = this.boardIndexForBoardId(boardId, this.boards);
     let columnIndex = this.columnIndexForColumnId(idOfColumnToBeEdited, this.boards[boardIndex].columns);
     this.boards[boardIndex].columns[columnIndex].title = newTitle;
@@ -137,7 +136,7 @@ export class BoardsdataProvider {
   deleteColumn(boardId: string, idOfColumnToBeDeleted: string){
     let boardIndex = this.boardIndexForBoardId(boardId, this.boards);
     let columnIndex = this.columnIndexForColumnId(idOfColumnToBeDeleted, this.boards[boardIndex].columns);
-    this.boards[boardId].columns.splice(columnIndex, 1);
+    this.boards[boardIndex].columns.splice(columnIndex, 1);
 
     this.writeToDataBase();
   }
@@ -146,7 +145,7 @@ export class BoardsdataProvider {
   createCard(boardId: string, idOfColumn: string, newCardTitle: string, timeEstimate: number, cardContent: string){
     let boardIndex = this.boardIndexForBoardId(boardId, this.boards);
     let columnIndex = this.columnIndexForColumnId(idOfColumn, this.boards[boardIndex].columns);
-    this.boards[boardId].columns[columnIndex].addNewCard(newCardTitle, timeEstimate, cardContent);
+    this.boards[boardIndex].columns[columnIndex].addNewCard(newCardTitle, timeEstimate, cardContent);
 
     this.writeToDataBase();
   }

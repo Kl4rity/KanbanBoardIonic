@@ -26,9 +26,12 @@ export class ReorderColumnsPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public boardsDataProvider: BoardsdataProvider,
-    public modalCtrl: ModalController) {
-    this.board = navParams.get("currentBoard");
+    public modalCtrl: ModalController) 
+    
+    { this.board = navParams.get("currentBoard");
+
     this.currentBoardId = this.board.id;
+
     this.boardsDataProvider.boards$.subscribe((newBoards) => {
       newBoards.forEach((board) => {
         if (board.id === this.currentBoardId) {
@@ -36,18 +39,13 @@ export class ReorderColumnsPage {
         }
       });
     });
+
   }
 
   reorderItems(indexes) {
-    let targetBoardIndex;
-    this.boardsDataProvider.boards.forEach((value, index) => {
-      if (value.id == this.currentBoardId) {
-        targetBoardIndex = index;
-      } else {
-        targetBoardIndex = -1;
-      }
-    }
-    );
+
+    let targetBoardIndex = this.boardsDataProvider.boardIndexForBoardId(this.currentBoardId, this.boardsDataProvider.boards);
+
     this.boardsDataProvider.boards[targetBoardIndex].columns = reorderArray(this.boardsDataProvider.boards[targetBoardIndex].columns, indexes);
     this.boardsDataProvider.writeToDataBase();
   }
