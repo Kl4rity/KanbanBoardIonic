@@ -161,34 +161,10 @@ export class BoardsdataProvider {
   }
 
   deleteCard(boardId: string, idOfColumn: string, idOfCard: string){
-    let boardIndex;
+    let boardIndex = this.boardIndexForBoardId(boardId, this.boards);
+    let columnIndex = this.columnIndexForColumnId(idOfColumn, this.boards[boardIndex].columns);
+    let cardIndex = this.cardIndexForCardId(idOfCard, this.boards[boardIndex].columns[columnIndex].cards);
 
-    this.boards.forEach((value, index)=>{
-      if(value.id === boardId){
-        boardIndex = index;
-      } else {
-        boardIndex = -1;
-      }
-    });
-
-    let columnIndex;
-    
-    this.boards[boardIndex].columns.forEach((value, index)=>{
-      if(value.id === idOfColumn){
-        columnIndex = index;
-      }else{
-        columnIndex = -1;
-      }
-    });
-
-    let cardIndex;
-    this.boards[boardIndex].columns[columnIndex].cards.forEach((value, index)=>{
-      if(value.id === idOfCard){
-        cardIndex = index;
-      }else{
-        cardIndex = -1;
-      }
-    });
 
     this.boards[boardIndex].columns[columnIndex].cards.splice(cardIndex, 1);
     this.writeToDataBase();
