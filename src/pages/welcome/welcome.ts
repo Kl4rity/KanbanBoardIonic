@@ -27,7 +27,7 @@ export class WelcomePage {
     ) {
 
     // this.boards = this.boardsprovider.getBoards();
-
+    
   }
 
   ionViewWillEnter(){
