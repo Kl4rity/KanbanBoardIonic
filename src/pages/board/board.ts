@@ -20,6 +20,7 @@ export class BoardPage {
   constructor(public navCtrl: NavController, public navParam: NavParams, public modalCtrl: ModalController) {
     
     this.board = navParam.get("board");
+    console.log(this.board);
 
     if(isCordova()){
       this.vibration = new Vibration();

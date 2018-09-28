@@ -14,21 +14,19 @@ import { Observable, BehaviorSubject } from 'rxjs';
 @Injectable()
 export class AuthProvider {
 
-  public user: Observable<firebase.User> = new BehaviorSubject<firebase.User>(null);
-  // public isLoggedIn: boolean = false;
+  public user: BehaviorSubject<firebase.User> = new BehaviorSubject<firebase.User>(null);
 
   constructor(public http: HttpClient, private afAuth: AngularFireAuth) {
     console.log('Hello ProvidersAuthenticationProvider Provider');
-  }
-
-  ngOnInit(){
   }
 
   login(email: string, password: string): Promise<firebase.auth.UserCredential>{
     let authPromise = this.afAuth.auth.signInWithEmailAndPassword(email, password);
     
     authPromise.then(()=>{
-      this.user = this.afAuth.authState;
+      this.afAuth.authState.subscribe((user)=>{
+        this.user.next(user);
+      });
     }).catch(
       (error)=>{
         throw error;

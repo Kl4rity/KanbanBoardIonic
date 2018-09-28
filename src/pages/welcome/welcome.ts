@@ -25,12 +25,15 @@ export class WelcomePage {
     public modalCtrl: ModalController,
     public auth: AuthProvider
     ) {
-    this.boards = this.boardsprovider.getBoards();
+
+    // this.boards = this.boardsprovider.getBoards();
 
   }
 
-  ngAfterContentChecked(){
-    this.boards = this.boardsprovider.getBoards();
+  ionViewWillEnter(){
+    this.boardsprovider.boards$.subscribe((boards)=>{
+      this.boards = boards;
+    });
   }
 
   onBoardSelect(board:KanbanBoard){

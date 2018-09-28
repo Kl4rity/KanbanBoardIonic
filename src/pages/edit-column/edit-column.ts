@@ -38,12 +38,12 @@ export class EditColumnPage {
   }
 
   onInputEnterPressed(columnTitle: string){
-    this.boardsDataProvider.editColumn(this.boardsDataProvider.boards.indexOf(this.currentBoard), this.currentColumn, columnTitle);
+    this.boardsDataProvider.editColumn(this.currentBoard.id, this.currentColumn.id, columnTitle);
     this.navCtrl.pop();
   }
 
-  onDeleteBoard(){
-    this.boardsDataProvider.deleteColumn(this.boardsDataProvider.boards.indexOf(this.currentBoard), this.currentColumn);
+  onDeleteColumn(){
+    this.boardsDataProvider.deleteColumn(this.currentBoard.id, this.currentColumn.id);
     this.navCtrl.pop();
   }
 

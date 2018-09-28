@@ -1,0 +1,1 @@
+export const ID_MULTIPLIER = 1000000000;

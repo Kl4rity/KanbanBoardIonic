@@ -1,17 +1,20 @@
-import {KanbanCard} from './KanbanCard.model';
+import { KanbanCard } from './KanbanCard.model';
+import { ID_MULTIPLIER } from '../shared/config.config';
 
 export class KanbanColumn {
     public title: string;
-    public columnLimit: number;
+    public columnLimit: number = 99;
     public cards: Array<KanbanCard> = [];
+    public id: string;
 
-    constructor(title: string, columnLimit?:number){
+    constructor(title: string, columnLimit?: number, id?:string) {
         this.title = title;
-        this.columnLimit = columnLimit;
+        if (id) {this.id = id} else {this.id = (Math.random() * ID_MULTIPLIER).toFixed()};
+        if (columnLimit) { this.columnLimit = columnLimit;}
     }
 
-    addNewCard(title:string, timeEstimate:number, content?:string){
-        if(this.isUnderColumnLimit()){
+    addNewCard(title: string, timeEstimate: number, content?: string) {
+        if (this.isUnderColumnLimit()) {
             this.cards.push(new KanbanCard(title, timeEstimate, content));
             return true;
         } else {
@@ -20,9 +23,9 @@ export class KanbanColumn {
         }
     }
 
-    isUnderColumnLimit(){
+    isUnderColumnLimit() {
         // Can only return false if a column-limit is actually set.
-        if(this.columnLimit){
+        if (this.columnLimit) {
             return (this.cards.length < this.columnLimit);
         } else {
             return true;

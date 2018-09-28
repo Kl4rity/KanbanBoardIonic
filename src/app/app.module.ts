@@ -23,6 +23,7 @@ import { EditColumnPage } from '../pages/edit-column/edit-column';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { fireBaseConfig } from '../secrets/firebase.secret';
 import { AuthProvider } from '../providers/authentication/auth.provider';
 import { SigninPage } from '../pages/signin/signin';
@@ -50,6 +51,7 @@ import { FormsModule } from '@angular/forms';
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(fireBaseConfig),
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     FormsModule
   ],
   bootstrap: [IonicApp],
@@ -72,7 +74,8 @@ import { FormsModule } from '@angular/forms';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BoardsdataProvider,
     AuthProvider,
-    AngularFireAuth
+    AngularFireAuth,
+    AngularFireDatabase
   ]
 })
 export class AppModule {}

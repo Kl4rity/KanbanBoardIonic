@@ -45,12 +45,12 @@ export class EditCardPage {
   }
 
   onInputEnterPressed(cardTitle: string, cardContent: string, cardTime: number){
-    this.boardsDataProvider.editCard((this.boardsDataProvider.boards.indexOf(this.currentBoard)), this.columnNumber, this.card, cardTitle, cardTime, cardContent);
+    this.boardsDataProvider.editCard(this.currentBoard.id, this.currentBoard.columns[this.columnNumber].id, this.card.id, cardTitle, cardTime, cardContent);
     this.navCtrl.pop();
   }
 
   onDeleteCard(){
-    this.boardsDataProvider.deleteCard((this.boardsDataProvider.boards.indexOf(this.currentBoard)),this.columnNumber, this.card);
+    this.boardsDataProvider.deleteCard(this.currentBoard.id,this.currentBoard.columns[this.columnNumber].id, this.card.id);
     this.navCtrl.pop();
   }
 

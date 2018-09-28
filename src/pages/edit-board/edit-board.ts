@@ -22,7 +22,7 @@ export class EditBoardPage {
   currentBoard: KanbanBoard;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public boardsDataProvider: BoardsdataProvider) {
-    this.currentBoard = navParams.get("currentBoard");
+    this.currentBoard = this.navParams.get("currentBoard");
   }
 
   ionViewDidLoad() {
@@ -30,16 +30,16 @@ export class EditBoardPage {
   }
 
   ionViewWillEnter(){
-    setInitialFocus(this.navCtrl, this.boardTitleInput);
+    setInitialFocus(this.navCtrl, this.boardTitleInput); 
   }
 
   onInputEnterPressed(boardTitle: string){
-    this.boardsDataProvider.editBoard(this.currentBoard, boardTitle);
+    this.boardsDataProvider.editBoard(this.currentBoard.id, boardTitle);
     this.navCtrl.pop();
   }
 
   onDeleteBoard(){
-    this.boardsDataProvider.deleteBoard(this.currentBoard);
+    this.boardsDataProvider.deleteBoard(this.currentBoard.id);
     this.navCtrl.pop();
   }
 

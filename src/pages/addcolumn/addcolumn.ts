@@ -23,6 +23,9 @@ export class AddcolumnPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public boardsDataProvider: BoardsdataProvider) {
     this.currentBoard = navParams.get("board");
+    console.log("add-column.ts constructor navParam 'board':");
+    console.log(navParams.get("board"));
+
   }
 
   ionViewWillEnter(){
@@ -30,7 +33,7 @@ export class AddcolumnPage {
   }
 
   onInputEnterPressed(columnName: string){
-    this.boardsDataProvider.createColumn((this.boardsDataProvider.boards.indexOf(this.currentBoard)), columnName);
+    this.boardsDataProvider.createColumn(this.currentBoard.id, columnName);
     this.navCtrl.pop();
   }
 

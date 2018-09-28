@@ -21,31 +21,48 @@ import { AddcolumnPage } from '../addcolumn/addcolumn';
 export class ReorderColumnsPage {
 
   board: KanbanBoard;
+  currentBoardId: string;
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
-              public boardsDataProvider: BoardsdataProvider,
-              public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public boardsDataProvider: BoardsdataProvider,
+    public modalCtrl: ModalController) {
     this.board = navParams.get("currentBoard");
+    this.currentBoardId = this.board.id;
+    this.boardsDataProvider.boards$.subscribe((newBoards) => {
+      newBoards.forEach((board) => {
+        if (board.id === this.currentBoardId) {
+          this.board = board;
+        }
+      });
+    });
   }
 
   reorderItems(indexes) {
-    let indexOfBoard = this.boardsDataProvider.boards.indexOf(this.board);
-    this.boardsDataProvider.boards[indexOfBoard].columns = reorderArray(this.boardsDataProvider.boards[indexOfBoard].columns, indexes);
+    let targetBoardIndex;
+    this.boardsDataProvider.boards.forEach((value, index) => {
+      if (value.id == this.currentBoardId) {
+        targetBoardIndex = index;
+      } else {
+        targetBoardIndex = -1;
+      }
+    }
+    );
+    this.boardsDataProvider.boards[targetBoardIndex].columns = reorderArray(this.boardsDataProvider.boards[targetBoardIndex].columns, indexes);
     this.boardsDataProvider.writeToDataBase();
   }
 
-  onBoardPress(column: KanbanColumn){
-    const modal = this.modalCtrl.create(EditColumnPage, {columnToBeEdited: column, currentBoard: this.board});
+  onBoardPress(column: KanbanColumn) {
+    const modal = this.modalCtrl.create(EditColumnPage, { columnToBeEdited: column, currentBoard: this.board });
     modal.present();
   }
 
-  onAddColumn(currentBoard: KanbanBoard){
-    const modal = this.modalCtrl.create(AddcolumnPage, {board: currentBoard});
+  onAddColumn(currentBoard: KanbanBoard) {
+    const modal = this.modalCtrl.create(AddcolumnPage, { board: currentBoard });
     modal.present();
   }
 
-  dismiss(){
+  dismiss() {
     this.navCtrl.pop();
   }
 }

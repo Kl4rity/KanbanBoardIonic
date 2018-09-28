@@ -13,13 +13,13 @@
 
 <ion-content padding>
 
-  <ion-list no-lines *ngIf="boards.length === 0">
+  <ion-list no-lines *ngIf="boards === null || boards === undefined || boards.length === 0">
       <ion-item>It is empty here... Create your first board!</ion-item>
       <ion-item>Click on the plus in the bottom right.</ion-item>
   </ion-list>
 
 
-  <ion-list no-lines reorder="true" (ionItemReorder)="reorderItems($event)" *ngIf="boards.length > 0">
+  <ion-list no-lines reorder="true" (ionItemReorder)="reorderItems($event)" *ngIf="!(boards === null || boards === undefined) && boards.length > 0">
     <ion-item *ngFor="let board of boards" (press)=onBoardPress(board) (click)="onBoardSelect(board)">{{board.title}}</ion-item>
   </ion-list>
 

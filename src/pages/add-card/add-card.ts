@@ -35,7 +35,7 @@ export class AddCardPage {
   }
 
   onInputEnterPressed(cardTitle: string, cardContent: string, cardTime: number){
-    this.boardsDataProvider.createCard((this.boardsDataProvider.boards.indexOf(this.currentBoard)), this.columnNumber, cardTitle, cardTime, cardContent);
+    this.boardsDataProvider.createCard(this.currentBoard.id, this.currentBoard.columns[this.columnNumber].id, cardTitle, cardTime, cardContent);
     this.navCtrl.pop();
   }
 
