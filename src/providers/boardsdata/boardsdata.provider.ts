@@ -8,8 +8,6 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { BehaviorSubject } from 'rxjs';
 import { AuthProvider } from '../authentication/auth.provider';
 
-
-
 @Injectable()
 export class BoardsdataProvider {
   public boards = new Array<KanbanBoard>();
@@ -28,6 +26,12 @@ export class BoardsdataProvider {
 
 
   // Workflow for building model from data pushed by FireBase;
+  // The JSON is "dropped" into this function via the subscribe - is built into the model specified into /src/models/* and that data is then 
+  // pushed onto a behavioursubject.
+
+  // Further down, the C(R)UD operations for the board, column and card are specified
+
+  // Towards the end of the file, the save-operation in specified.
   fetchFireBaseData(){
     this.auth.user.subscribe((user)=>{
 

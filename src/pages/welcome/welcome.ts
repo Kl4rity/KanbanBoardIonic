@@ -8,6 +8,7 @@ import { AddBoardPage } from '../add-board/add-board';
 import { EditBoardPage } from '../edit-board/edit-board';
 import { AuthProvider } from '../../providers/authentication/auth.provider';
 import { SigninPage } from '../signin/signin';
+import { Vibration } from '@ionic-native/vibration';
 
 @IonicPage()
 @Component({
@@ -23,13 +24,14 @@ export class WelcomePage {
     public navParams: NavParams,
     public boardsprovider: BoardsdataProvider,
     public modalCtrl: ModalController,
-    public auth: AuthProvider
+    public auth: AuthProvider,
+    public vibration: Vibration
     ) {
-
-    // this.boards = this.boardsprovider.getBoards();
     
   }
 
+  // subscribes to the observable $boards and continuously updates the view - and its children with the latest data.
+  
   ionViewWillEnter(){
     this.boardsprovider.boards$.subscribe((boards)=>{
       this.boards = boards;
@@ -50,10 +52,12 @@ export class WelcomePage {
     this.boardsprovider.writeToDataBase();
   }
 
+  // on long press.
   onBoardPress(board: KanbanBoard){
     this.navCtrl.push(EditBoardPage, {currentBoard: board});
   }
 
+  // Should the user not be logged in, the page redirects him to the sign in page.
   ionViewDidEnter(){
     this.auth.user.subscribe((user)=>{
       if(user === null){

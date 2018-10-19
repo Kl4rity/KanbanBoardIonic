@@ -1,3 +1,5 @@
+// View for reordering columns / rearranging the columns array.
+
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, reorderArray, ModalController } from 'ionic-angular';
 import { KanbanBoard } from '../../models/KanbanBoard.model';

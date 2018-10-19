@@ -1,3 +1,5 @@
+// View displaying the actual board.
+
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { KanbanBoard } from '../../models/KanbanBoard.model';

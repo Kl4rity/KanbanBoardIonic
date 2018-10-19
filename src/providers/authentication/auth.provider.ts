@@ -21,6 +21,8 @@ export class AuthProvider {
   }
 
   login(email: string, password: string): Promise<firebase.auth.UserCredential>{
+    // TODO: setting the persistence does not yet work...
+    // this.afAuth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
     let authPromise = this.afAuth.auth.signInWithEmailAndPassword(email, password);
     
     authPromise.then(()=>{

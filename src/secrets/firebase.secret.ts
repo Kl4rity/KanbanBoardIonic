@@ -1,3 +1,5 @@
+// A folder not being pushed to Github.
+
 export const fireBaseConfig = {
     apiKey: "AIzaSyBqhGSUOtUmuVLLh3-W41ERs39jd1d5GGc",
     authDomain: "kanban-d3752.firebaseapp.com",

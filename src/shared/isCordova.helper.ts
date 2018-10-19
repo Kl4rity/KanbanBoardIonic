@@ -1,3 +1,5 @@
+// Helper.
+
 import { Platform } from 'ionic-angular';
 
 export function isCordova(){

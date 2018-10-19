@@ -12,6 +12,9 @@ import { setInitialFocus } from '../../shared/SetInitialFocus.helper';
 
 export class SigninPage {
 
+  // If the user is not set, the entry component (welcome.ts) redirects the user to the sign in page and prevents him from leaving until it is set. 
+  // It subscribes to the user object and, as soon as it is set, it pops the sign in page from the nav-stack.
+
   private canLeave: boolean = false;
   public loginVisible: boolean = true;
 
@@ -36,7 +39,24 @@ export class SigninPage {
     private auth: AuthProvider,
     private toastCtrl: ToastController,
   ) {
-    // Empty constructor.
+    console.log("Constructor SigninPage");
+
+    console.log(auth.user.value);
+    console.log(auth.user);
+
+    if(auth.user.value){
+      console.log(auth.user.value);
+    }
+
+    auth.user.subscribe((value)=>{
+      if(value){
+        console.log("Signinpage subscribe user-Object: ");
+        console.log(value);
+        this.canLeave = true;
+        this.navCtrl.pop();
+      }
+    });
+
   }
 
   ionViewDidLoad() {
@@ -58,10 +78,9 @@ export class SigninPage {
     }
 
     this.auth.login(this.loginEmail, this.loginPassword)
-      .then(
-        (value) => {
-          this.canLeave = true;
-          this.navCtrl.pop();
+      .then((value) => {
+          // this.canLeave = true;
+          // this.navCtrl.pop();
         }).catch((error)=>{
         this.showToast(error);
       });
