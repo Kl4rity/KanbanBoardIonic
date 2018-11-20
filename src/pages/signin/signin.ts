@@ -40,8 +40,8 @@ export class SigninPage {
     private auth: AuthProvider,
     private toastCtrl: ToastController,
   ) {
-    auth.user.subscribe(user=>{
-      if(user){
+    auth.user.subscribe(user => {
+      if (user) {
         this.canLeave = true;
         this.navCtrl.pop();
         this.showToast(`Successfully authenticated with ${user.email}.`);
@@ -53,7 +53,7 @@ export class SigninPage {
     console.log('ionViewDidLoad SigninPage');
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     setInitialFocus(this.navCtrl, this.loginEmailInput);
   }
 
@@ -69,10 +69,24 @@ export class SigninPage {
 
     this.auth.login(this.loginEmail, this.loginPassword)
       .then((value) => {
-          // this.canLeave = true;
-          // this.navCtrl.pop();
-        }).catch((error)=>{
+        // Handled in subscribe at the top of the class.
+      }).catch((error) => {
         this.showToast(error);
+      });
+  }
+
+  onForgotPassword() {
+    if (!this.loginEmail) {
+      this.showToast("Please supply an email address.");
+      return;
+    };
+
+    this.auth.sendPasswordReset(this.loginEmail)
+      .then(() => {
+        this.showToast("Password reset sent - please check your email.");
+      })
+      .catch((err)=>{
+        this.showToast(err);
       });
   }
 
@@ -95,15 +109,15 @@ export class SigninPage {
     }
     // In case of a successful return - toggle the loginVisible
     this.auth.createUser(this.createEmail, this.createPassword)
-        .then(() => {
-          this.showToast("Account was created. Feel free to log in by pressing Enter.");
-          this.toggleLoginCreateAccount();
-          setTimeout(()=>{
-            this.loginPasswordInput.setFocus();
-          }, 600);
-          this.loginEmail = this.createEmail.valueOf();
-          this.loginPassword = this.createPassword.valueOf();
-        }
+      .then(() => {
+        this.showToast("Account was created. Feel free to log in by pressing Enter.");
+        this.toggleLoginCreateAccount();
+        setTimeout(() => {
+          this.loginPasswordInput.setFocus();
+        }, 600);
+        this.loginEmail = this.createEmail.valueOf();
+        this.loginPassword = this.createPassword.valueOf();
+      }
       );
   }
 

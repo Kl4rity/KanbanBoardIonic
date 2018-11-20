@@ -39,6 +39,10 @@ export class AuthProvider {
     return createUserPromise;
   }
 
+  sendPasswordReset(email: string){
+    return this.afAuth.auth.sendPasswordResetEmail(email);
+  }
+
   logout(): void{
     this.afAuth.auth.signOut();
     this.user = null;
