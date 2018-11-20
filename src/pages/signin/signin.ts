@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { AuthProvider } from '../../providers/authentication/auth.provider';
 import 'rxjs/add/operator/take';
 import { setInitialFocus } from '../../shared/SetInitialFocus.helper';
+import firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -39,24 +40,13 @@ export class SigninPage {
     private auth: AuthProvider,
     private toastCtrl: ToastController,
   ) {
-    console.log("Constructor SigninPage");
-
-    console.log(auth.user.value);
-    console.log(auth.user);
-
-    if(auth.user.value){
-      console.log(auth.user.value);
-    }
-
-    auth.user.subscribe((value)=>{
-      if(value){
-        console.log("Signinpage subscribe user-Object: ");
-        console.log(value);
+    auth.user.subscribe(user=>{
+      if(user){
         this.canLeave = true;
         this.navCtrl.pop();
+        this.showToast(`Successfully authenticated with ${user.email}.`);
       }
     });
-
   }
 
   ionViewDidLoad() {
