@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 
 /*
@@ -17,23 +17,19 @@ export class AuthProvider {
   public user: BehaviorSubject<firebase.User> = new BehaviorSubject<firebase.User>(null);
 
   constructor(public http: HttpClient, private afAuth: AngularFireAuth) {
-    console.log('Hello ProvidersAuthenticationProvider Provider');
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        // User is signed in.
+        this.user.next(user);
+      } else {
+        // User is signed out.
+      }
+    });
   }
 
   login(email: string, password: string): Promise<firebase.auth.UserCredential>{
-    // TODO: setting the persistence does not yet work...
-    // this.afAuth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+    this.afAuth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
     let authPromise = this.afAuth.auth.signInWithEmailAndPassword(email, password);
-    
-    authPromise.then(()=>{
-      this.afAuth.authState.subscribe((user)=>{
-        this.user.next(user);
-      });
-    }).catch(
-      (error)=>{
-        throw error;
-      }
-    );
 
     return authPromise;
   }
