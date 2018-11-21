@@ -30,6 +30,8 @@ import { FormsModule } from '@angular/forms';
 
 // Ionic Native Modules:
 import { Vibration } from '@ionic-native/vibration';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 
 @NgModule({
   declarations: [
@@ -78,7 +80,8 @@ import { Vibration } from '@ionic-native/vibration';
     AuthProvider,
     AngularFireAuth,
     AngularFireDatabase,
-    Vibration
+    Vibration,
+    LocalNotifications
   ]
 })
 export class AppModule {}

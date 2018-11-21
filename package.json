@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "5.2.11",
     "@ionic-native/core": "4.7.0",
     "@ionic-native/keyboard": "^4.14.0",
+    "@ionic-native/local-notifications": "^4.17.0",
     "@ionic-native/splash-screen": "4.7.0",
     "@ionic-native/status-bar": "4.7.0",
     "@ionic-native/vibration": "^4.17.0",
@@ -34,9 +35,11 @@
     "cordova": "^8.0.0",
     "cordova-android": "^7.1.1",
     "cordova-ios": "^4.5.5",
+    "cordova-plugin-badge": "^0.8.8",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.1.2",
     "cordova-plugin-ionic-webview": "^2.1.4",
+    "cordova-plugin-local-notification": "^0.9.0-beta.2",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-vibration": "^3.1.0",
@@ -78,7 +81,8 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "ionic-plugin-keyboard": {},
-      "cordova-plugin-vibration": {}
+      "cordova-plugin-vibration": {},
+      "cordova-plugin-local-notification": {}
     },
     "platforms": [
       "ios"
