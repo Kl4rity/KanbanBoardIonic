@@ -34,19 +34,19 @@ export class SigninPage {
   public createPassword = "";
   public createPasswordRepeat = "";
 
+  private user$;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private auth: AuthProvider,
     private toastCtrl: ToastController,
   ) {
-    auth.user.subscribe(user => {
-      if (user) {
-        this.canLeave = true;
-        this.navCtrl.pop();
-        this.showToast(`Successfully authenticated with ${user.email}.`);
-      }
-    });
+    
+  }
+
+  ngOnDestroy(){
+    this.user$.unsubscribe();
   }
 
   ionViewDidLoad() {
@@ -55,6 +55,17 @@ export class SigninPage {
 
   ionViewWillEnter() {
     setInitialFocus(this.navCtrl, this.loginEmailInput);
+    this.user$ = this.auth.user.skip(1).subscribe(user => {
+      if (user) {
+        this.canLeave = true;
+        this.navCtrl.goToRoot({});
+        this.showToast(`Successfully authenticated with ${user.email}.`);
+      }
+    });
+  }
+
+  ionViewDidLeave(){
+    this.user$.unsubscribe();
   }
 
   ionViewCanLeave() {
@@ -68,9 +79,7 @@ export class SigninPage {
     }
 
     this.auth.login(this.loginEmail, this.loginPassword)
-      .then((value) => {
-        // Handled in subscribe at the top of the class.
-      }).catch((error) => {
+    .catch((error) => {
         this.showToast(error);
       });
   }

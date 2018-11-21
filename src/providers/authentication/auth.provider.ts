@@ -18,12 +18,7 @@ export class AuthProvider {
 
   constructor(public http: HttpClient, private afAuth: AngularFireAuth) {
     firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        // User is signed in.
-        this.user.next(user);
-      } else {
-        // User is signed out.
-      }
+      this.user.next(user);
     });
   }
 
@@ -43,8 +38,7 @@ export class AuthProvider {
     return this.afAuth.auth.sendPasswordResetEmail(email);
   }
 
-  logout(): void{
-    this.afAuth.auth.signOut();
-    this.user = null;
+  logout(): Promise<void>{
+    return this.afAuth.auth.signOut();
   }
 }
