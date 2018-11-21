@@ -3,6 +3,7 @@ import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { ToastController, ModalController, Slides } from 'ionic-angular';
 import { AddCardPage } from '../../pages/add-card/add-card';
 import { Vibration } from '@ionic-native/vibration';
+import { isCordova } from '../../shared/isCordova.helper';
 
 /**
  * Generated class for the KanbanboardComponent component.
@@ -62,6 +63,8 @@ export class KanbanboardComponent {
   }
   private notifyCardCouldNotBeMoved() {
     this.showToast("Cannot move Card off Board.");
-    this.vibration.vibrate(200);
+    if(isCordova()){
+      this.vibration.vibrate(200);
+    }
   }
 }
