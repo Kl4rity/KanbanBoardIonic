@@ -7,6 +7,7 @@ import { KanbanColumn } from '../../models/KanbanColumn.model';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { BehaviorSubject } from 'rxjs';
 import { AuthProvider } from '../authentication/auth.provider';
+import { buildTutorialBoard } from '../../shared/tutorial.board';
 
 @Injectable()
 export class BoardsdataProvider {
@@ -49,7 +50,7 @@ export class BoardsdataProvider {
           this.afdb.object('/users/'+ user.uid +'/boards').valueChanges().map((boards:Object)=>{
           this.uid = user.uid;
           if(boards == null){
-            this.boards$.next(new Array<KanbanBoard>());
+            this.handleUserNotHavingAnyBoards();
           }
           
           let newKanbanBoards:Array<KanbanBoard> = [];
@@ -68,6 +69,13 @@ export class BoardsdataProvider {
         });
       }
     });
+  }
+
+  handleUserNotHavingAnyBoards(){
+    let kanbanBoardArray = new Array<KanbanBoard>();
+    kanbanBoardArray.push(buildTutorialBoard());
+    this.boards = kanbanBoardArray;
+    this.writeToDataBase();
   }
 
   buildColumns(columns:Object): Array<KanbanColumn>{
