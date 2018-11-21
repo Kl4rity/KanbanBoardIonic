@@ -9,6 +9,7 @@ import { EditBoardPage } from '../edit-board/edit-board';
 import { AuthProvider } from '../../providers/authentication/auth.provider';
 import { SigninPage } from '../signin/signin';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { isCordova } from '../../shared/isCordova.helper';
 
 @IonicPage()
 @Component({
@@ -46,8 +47,10 @@ export class WelcomePage {
         this.navCtrl.push(SigninPage);
       }
     });
-    this.getNotificationPermission();
-    this.schedulePlanningReminders()
+    if (isCordova()) {
+      this.getNotificationPermission();
+      this.schedulePlanningReminders()
+    }
   }
 
   getNotificationPermission() {
@@ -58,7 +61,7 @@ export class WelcomePage {
     }
   }
 
-  showNotificationRequestAlert(){
+  showNotificationRequestAlert() {
     const alert = this.alertCtrl.create({
       title: "May we interrupt?",
       subTitle: "In order for a Kanban board to work, it needs to be kept relatively up-to-date. We would like to remind you to use the board again a week after you last checked in and then another two weeks after that. Would that be okay?",
@@ -67,11 +70,11 @@ export class WelcomePage {
     alert.present();
   }
 
-  handlePermissionRequestResponse(permissionWasGranted){
-    if(!permissionWasGranted){
+  handlePermissionRequestResponse(permissionWasGranted) {
+    if (!permissionWasGranted) {
       this.showToast("We won't be bothering you with notifications!");
     }
-    if(permissionWasGranted){
+    if (permissionWasGranted) {
       this.showToast("Thank you for your trust! We will keep it as light as possible.");
     }
   }
@@ -83,13 +86,13 @@ export class WelcomePage {
       id: 1,
       title: 'How\'s your planning going?',
       text: 'We haven\'t seen you interacting with your Kanban Boards for a while now.',
-      trigger: {at: new Date(new Date().getTime() + (7*24*60*1000))}
-     },{
+      trigger: { at: new Date(new Date().getTime() + (7 * 24 * 60 * 1000)) }
+    }, {
       id: 2,
       title: 'Our last hello...',
       text: 'We hope your planning\'s going well! You haven\'t checked into Kanban for three weeks now. We assume all is well and won\'t contact you any longer!',
-      trigger: {at: new Date(new Date().getTime() + (3*7*24*60*1000))}
-   }]);
+      trigger: { at: new Date(new Date().getTime() + (3 * 7 * 24 * 60 * 1000)) }
+    }]);
   }
 
   onBoardSelect(board: KanbanBoard) {

@@ -26,17 +26,15 @@ export class KanbanBoard {
 
     moveCardToColumn(cardToBeMoved: KanbanCard, columnTobeMovedFrom: KanbanColumn, shiftBy: number): boolean {
 
-        let indexOfColumn: number = this.getColumnIndex(columnTobeMovedFrom);
-        let targetIndexOfColumn: number = indexOfColumn + shiftBy;
+        let originalColumnIndex: number = this.getColumnIndex(columnTobeMovedFrom);
+        let targetColumnIndex: number = originalColumnIndex + shiftBy;
 
-        if (this.isValidColumn(targetIndexOfColumn)) {
-            // Filter the cards list and return one where the card isn't present anymore.
-            this.columns.map((column, index) => {
-                this.columns[index].cards = column.cards.filter(card => card !== cardToBeMoved);
-            });
+        // Get the original position of the card
+        let targetPositionInTargetColumn: number = columnTobeMovedFrom.cards.indexOf(cardToBeMoved);
 
-            // Push the card onto the column it needs to be in.
-            this.columns[targetIndexOfColumn].cards.push(cardToBeMoved);
+        if (this.isValidColumn(targetColumnIndex)) {
+            this.removeCardFromOriginalColumn(originalColumnIndex, cardToBeMoved);
+            this.addCardToTargetColumn(targetColumnIndex, cardToBeMoved, targetPositionInTargetColumn);
             return true;
         }
         return false;
@@ -44,5 +42,15 @@ export class KanbanBoard {
 
     getColumnIndex(column: KanbanColumn): number {
         return this.columns.indexOf(column);
+    }
+
+    removeCardFromOriginalColumn(originalColumnIndex: number, cardToBeMoved: KanbanCard){
+        this.columns[originalColumnIndex].cards = this.columns[originalColumnIndex].cards.filter(card => card !== cardToBeMoved);
+    }
+
+    addCardToTargetColumn(targetColumnIndex: number, cardToBeMoved: KanbanCard, targetPosition: number){
+        
+        this.columns[targetColumnIndex].cards.splice(targetPosition, 0, cardToBeMoved);
+        // this.columns[targetColumnIndex].cards.push(cardToBeMoved);
     }
 }

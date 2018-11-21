@@ -6,6 +6,7 @@ import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { ReorderColumnsPage } from '../reorder-columns/reorder-columns';
 import { Vibration } from '@ionic-native/vibration';
 import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata.provider';
+import { isCordova } from '../../shared/isCordova.helper';
 
 
 @Component({
@@ -53,7 +54,9 @@ export class BoardPage {
     let isRightOfBoard:boolean = $boardChangeEvent.columnIndex + 1 > this.board.columns.length;
 
     if(this.doBoardsExist() && (isLeftOfBoard || isRightOfBoard)){
-      this.vibration.vibrate(200);
+      if(isCordova()){
+        this.vibration.vibrate(200);
+      }
     }
   }
   private loadCurrentColumnTitleIntoStatusBarIfItExists($boardChangeEvent){
