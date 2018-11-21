@@ -31,6 +31,7 @@ import { FormsModule } from '@angular/forms';
 // Ionic Native Modules:
 import { Vibration } from '@ionic-native/vibration';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { ProfileOptionsPage } from '../pages/profile-options/profile-options';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     EditBoardPage,
     ReorderColumnsPage,
     EditColumnPage,
-    SigninPage
+    SigninPage,
+    ProfileOptionsPage
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     EditBoardPage,
     ReorderColumnsPage,
     EditColumnPage,
-    SigninPage
+    SigninPage,
+    ProfileOptionsPage
     ],
   providers: [
     StatusBar,

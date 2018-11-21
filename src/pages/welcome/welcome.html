@@ -7,6 +7,11 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Your Boards</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="onProfileOptions()">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -14,8 +19,8 @@
 <ion-content padding>
 
   <ion-list no-lines *ngIf="boards === null || boards === undefined || boards.length === 0">
-      <ion-item>It is empty here... Create your first board!</ion-item>
-      <ion-item>Click on the plus in the bottom right.</ion-item>
+    <ion-item>It is empty here... Create your first board!</ion-item>
+    <ion-item>Click on the plus in the bottom right.</ion-item>
   </ion-list>
 
 
@@ -24,6 +29,8 @@
   </ion-list>
 
   <ion-fab right bottom>
-    <button ion-fab (click)=onAdd()><ion-icon name="add"></ion-icon></button>
+    <button ion-fab (click)=onAdd()>
+      <ion-icon name="add"></ion-icon>
+    </button>
   </ion-fab>
 </ion-content>

@@ -10,6 +10,8 @@ import { AuthProvider } from '../../providers/authentication/auth.provider';
 import { SigninPage } from '../signin/signin';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { isCordova } from '../../shared/isCordova.helper';
+import { ProfileOptionsPage } from '../profile-options/profile-options';
+import { User } from 'firebase';
 
 @IonicPage()
 @Component({
@@ -19,6 +21,9 @@ import { isCordova } from '../../shared/isCordova.helper';
 export class WelcomePage {
 
   public boards: Array<KanbanBoard>;
+  public user : User;
+  public boards$;
+  public user$;
 
   constructor(
     public navCtrl: NavController,
@@ -30,11 +35,19 @@ export class WelcomePage {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController
   ) {
-
+    
   }
 
   // subscribes to the observable $boards and continuously updates the view - and its children with the latest data.
   ionViewWillEnter() {
+    if(!this.user$){
+      this.user$ = this.auth.user.subscribe((user) => {
+        if (!user) {
+          this.navCtrl.push(SigninPage);
+        }
+        this.user = user;
+      });
+    }
     this.boardsprovider.boards$.subscribe((boards) => {
       this.boards = boards;
     });
@@ -42,11 +55,6 @@ export class WelcomePage {
 
   // Should the user not be logged in, the page redirects him to the sign in page.
   ionViewDidEnter() {
-    this.auth.user.subscribe((user) => {
-      if (user === null) {
-        this.navCtrl.push(SigninPage);
-      }
-    });
     if (isCordova()) {
       this.getNotificationPermission();
       this.schedulePlanningReminders()
@@ -112,6 +120,10 @@ export class WelcomePage {
   // on long press.
   onBoardPress(board: KanbanBoard) {
     this.navCtrl.push(EditBoardPage, { currentBoard: board });
+  }
+
+  onProfileOptions(){
+    this.navCtrl.push(ProfileOptionsPage, { user: this.user });
   }
 
   private showToast(notification: string) {
