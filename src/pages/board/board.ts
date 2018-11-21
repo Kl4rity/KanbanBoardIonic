@@ -5,7 +5,6 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { ReorderColumnsPage } from '../reorder-columns/reorder-columns';
 import { Vibration } from '@ionic-native/vibration';
-import { isCordova } from '../../shared/isCordova.helper';
 import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata.provider';
 
 
@@ -18,11 +17,15 @@ export class BoardPage {
 
   public board: KanbanBoard;
   public columnTitle : string;
-  private vibration:Vibration;
   private boardId: string;
 
-  constructor(public navCtrl: NavController, public navParam: NavParams, public modalCtrl: ModalController, private boardsdataProvider: BoardsdataProvider) {
-    
+  constructor(
+    public navCtrl: NavController,
+    public navParam: NavParams,
+    public modalCtrl: ModalController,
+    private boardsdataProvider: BoardsdataProvider,
+    public vibration: Vibration
+    ) {
     this.board = navParam.get("board");
     this.boardId = this.board.id;
 
@@ -33,10 +36,6 @@ export class BoardPage {
         }
       });
     });
-
-    if(isCordova()){
-      this.vibration = new Vibration();
-    }
     if(this.doBoardsExist()){
       this.columnTitle = this.board.columns[0].title;
     }
@@ -54,7 +53,7 @@ export class BoardPage {
     let isRightOfBoard:boolean = $boardChangeEvent.columnIndex + 1 > this.board.columns.length;
 
     if(this.doBoardsExist() && (isLeftOfBoard || isRightOfBoard)){
-      this.vibration.vibrate(500);
+      this.vibration.vibrate(200);
     }
   }
   private loadCurrentColumnTitleIntoStatusBarIfItExists($boardChangeEvent){

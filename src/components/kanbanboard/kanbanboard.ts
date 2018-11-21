@@ -1,11 +1,8 @@
 import { Component, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { ToastController, ModalController, Slides } from 'ionic-angular';
-import { AddcolumnPage } from '../../pages/addcolumn/addcolumn';
 import { AddCardPage } from '../../pages/add-card/add-card';
 import { Vibration } from '@ionic-native/vibration';
-import { isCordova } from '../../shared/isCordova.helper';
-
 
 /**
  * Generated class for the KanbanboardComponent component.
@@ -23,40 +20,34 @@ export class KanbanboardComponent {
   @ViewChild(Slides) slides: Slides;
   @Output() columnChange: EventEmitter<any>;
 
-  private vibration:Vibration;
+  constructor(public toastCtrl: ToastController, public modalCtrl: ModalController, public vibration: Vibration) {
 
-  constructor(public toastCtrl: ToastController, public modalCtrl: ModalController) {
-    
     this.columnChange = new EventEmitter<any>();
+  }
 
-    if(isCordova()){
-      this.vibration = new Vibration();
+  ngAfterContentChecked() {
+    if (this.board.columns.length === 1) {
+      this.columnChange.emit({ columnIndex: 0 });
     }
   }
 
-  ngAfterContentChecked(){
-    if(this.board.columns.length === 1){
-      this.columnChange.emit({columnIndex: 0});
-    }
-  }
-
-  moveCard($event){
-  // Actual moving of data done by the baordModel.
-  let success: boolean = this.board.moveCardToColumn($event.card, $event.column, $event.shift);
-  // Display a Toast message on failure.
-  if(!success){
+  moveCard($event) {
+    // Actual moving of data done by the baordModel.
+    let success: boolean = this.board.moveCardToColumn($event.card, $event.column, $event.shift);
+    // Display a Toast message on failure.
+    if (!success) {
       this.notifyCardCouldNotBeMoved();
     }
   }
 
-  onAddCard(currentBoard: KanbanBoard){
-    const modal = this.modalCtrl.create(AddCardPage, {board: currentBoard, column: this.slides.getActiveIndex()});
+  onAddCard(currentBoard: KanbanBoard) {
+    const modal = this.modalCtrl.create(AddCardPage, { board: currentBoard, column: this.slides.getActiveIndex() });
     modal.present();
   }
 
-  slideChanged(){
+  slideChanged() {
     // DEBUG console.log("slideChanged() :" + this.slides.getActiveIndex());
-    this.columnChange.emit({columnIndex: this.slides.getActiveIndex()});
+    this.columnChange.emit({ columnIndex: this.slides.getActiveIndex() });
   }
 
   // Making it into a helper function is not as easy as it seems | a service is what is already offered by the framework. Stays here for now.
@@ -69,10 +60,8 @@ export class KanbanboardComponent {
 
     toast.present(toast);
   }
-  private notifyCardCouldNotBeMoved(){
+  private notifyCardCouldNotBeMoved() {
     this.showToast("Cannot move Card off Board.");
-    if(isCordova()){
-      this.vibration.vibrate(500);
-    }
+    this.vibration.vibrate(200);
   }
 }

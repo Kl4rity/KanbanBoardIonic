@@ -8,7 +8,6 @@ import { AddBoardPage } from '../add-board/add-board';
 import { EditBoardPage } from '../edit-board/edit-board';
 import { AuthProvider } from '../../providers/authentication/auth.provider';
 import { SigninPage } from '../signin/signin';
-import { Vibration } from '@ionic-native/vibration';
 
 @IonicPage()
 @Component({
@@ -25,9 +24,8 @@ export class WelcomePage {
     public boardsprovider: BoardsdataProvider,
     public modalCtrl: ModalController,
     public auth: AuthProvider,
-    public vibration: Vibration
     ) {
-    
+
   }
 
   // subscribes to the observable $boards and continuously updates the view - and its children with the latest data.

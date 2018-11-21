@@ -28,6 +28,9 @@ import { AuthProvider } from '../providers/authentication/auth.provider';
 import { SigninPage } from '../pages/signin/signin';
 import { FormsModule } from '@angular/forms';
 
+// Ionic Native Modules:
+import { Vibration } from '@ionic-native/vibration';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -74,7 +77,8 @@ import { FormsModule } from '@angular/forms';
     BoardsdataProvider,
     AuthProvider,
     AngularFireAuth,
-    AngularFireDatabase
+    AngularFireDatabase,
+    Vibration
   ]
 })
 export class AppModule {}
