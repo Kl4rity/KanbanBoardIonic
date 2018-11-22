@@ -1,11 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/authentication/auth.provider';
 import 'rxjs/add/operator/take';
 import { setInitialFocus } from '../../shared/SetInitialFocus.helper';
-import firebase from 'firebase';
 
-@IonicPage()
 @Component({
   selector: 'page-signin',
   templateUrl: 'signin.html',

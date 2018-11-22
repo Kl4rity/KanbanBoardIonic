@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, reorderArray, ToastController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, reorderArray, ToastController, AlertController } from 'ionic-angular';
 import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata.provider';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { BoardPage } from '../../pages/board/board';
@@ -13,7 +13,6 @@ import { isCordova } from '../../shared/isCordova.helper';
 import { ProfileOptionsPage } from '../profile-options/profile-options';
 import { User } from 'firebase';
 
-@IonicPage()
 @Component({
   selector: 'page-welcome',
   templateUrl: 'welcome.html',

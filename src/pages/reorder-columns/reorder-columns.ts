@@ -1,7 +1,7 @@
 // View for reordering columns / rearranging the columns array.
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, reorderArray, ModalController } from 'ionic-angular';
+import { NavController, NavParams, reorderArray, ModalController } from 'ionic-angular';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata.provider';
 import { KanbanColumn } from '../../models/KanbanColumn.model';
@@ -15,7 +15,6 @@ import { AddcolumnPage } from '../addcolumn/addcolumn';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-reorder-columns',
   templateUrl: 'reorder-columns.html',

@@ -1,7 +1,7 @@
 // Form.
 
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata.provider';
 import { KanbanCard } from '../../models/KanbanCard.model';
@@ -14,7 +14,6 @@ import { setInitialFocus } from '../../shared/SetInitialFocus.helper';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-edit-card',
   templateUrl: 'edit-card.html',

@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
-import { Storage } from '@ionic/storage';
 import { KanbanCard } from '../../models/KanbanCard.model';
 import { KanbanColumn } from '../../models/KanbanColumn.model';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -16,7 +15,6 @@ export class BoardsdataProvider {
 
   constructor(
     public http: HttpClient,
-    private storage: Storage,
     private afdb: AngularFireDatabase,
     private auth: AuthProvider
   ) {
