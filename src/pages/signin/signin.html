@@ -13,7 +13,7 @@
 
 
 <ion-content padding>
-  <img center src="../../assets/imgs/logo.png" alt="Kanban Logo" style="width: 50%; left: 25%; position: relative;" >
+  <img center src="assets/imgs/logo.png" alt="Kanban Logo" style="width: 50%; left: 25%; position: relative;" >
   <ion-list>
     <div [hidden]="!this.loginVisible">
       <ion-item>
@@ -32,10 +32,11 @@
       <div class="switchLogin">
         Forgot your password? 
         <br>
-        <a (click)="onForgotPassword()">Click here to send a password reset.</a>
+        <br>
+        <a (click)="onForgotPassword()">Click here to send a password reset. <ion-icon class="alignWithText" name="arrow-dropright"></ion-icon></a>
         <br>
         <br>
-        <a (click)="toggleLoginCreateAccount()">No account yet?</a>
+        <a (click)="toggleLoginCreateAccount()">No account yet? <ion-icon class="alignWithText" name="arrow-dropright"></ion-icon></a>
       </div>
     </div>
 
@@ -58,7 +59,7 @@
       </div>
       <br>
       <div class="switchLogin">
-        <a (click)="toggleLoginCreateAccount()">Already have an account? Go back to signing in.</a>
+        <a (click)="toggleLoginCreateAccount()">Already have an account? Go back to signing in. <ion-icon class="alignWithText" name="arrow-dropright"></ion-icon></a>
       </div>
     </div>
 
