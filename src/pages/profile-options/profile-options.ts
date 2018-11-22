@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/authentication/auth.provider';
-import { BoardPage } from '../board/board';
-import { buildTutorialBoard } from '../../shared/tutorial.board';
 import { SigninPage } from '../signin/signin';
 import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata.provider';
 import { User } from 'firebase';

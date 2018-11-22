@@ -7,7 +7,6 @@ import { KanbanColumn } from '../../models/KanbanColumn.model';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { BehaviorSubject } from 'rxjs';
 import { AuthProvider } from '../authentication/auth.provider';
-import { buildTutorialBoard } from '../../shared/tutorial.board';
 
 @Injectable()
 export class BoardsdataProvider {
