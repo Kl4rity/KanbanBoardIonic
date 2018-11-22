@@ -2,4 +2,15 @@ page-signin {
     .switchLogin {
         text-align: center;
     }
+
+    .alignWithText {
+        position: relative;
+        top: 2px;
+    }
+
+    .logoPrimary {
+        width: 50%;
+        left: 25%;
+        position: relative;
+    }
 }
