@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { KanbanColumn } from '../../models/KanbanColumn.model';
 import { KanbanCard } from '../../models/KanbanCard.model';
-import { ModalController, reorderArray } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 import { EditCardPage } from '../../pages/edit-card/edit-card';
 import { KanbanBoard } from '../../models/KanbanBoard.model';
 import { BoardsdataProvider } from '../../providers/boardsdata/boardsdata.provider';
@@ -25,19 +25,38 @@ export class KanbancolumnComponent {
     this.move = new EventEmitter<any>();
   }
 
-  log($event){
+  log($event) {
     this.move.emit(
-      {column: this.column, card: $event.card,  shift: $event.shift}
+      { column: this.column, card: $event.card, shift: $event.shift }
     );
   }
 
-  onCardPress(card: KanbanCard){
-    const modal = this.modalCtrl.create(EditCardPage ,{currentCard: card, currentBoard: this.board, column: this.board.columns.indexOf(this.column)});
+  onCardPress(card: KanbanCard) {
+    const modal = this.modalCtrl.create(EditCardPage, { currentCard: card, currentBoard: this.board, column: this.board.columns.indexOf(this.column) });
     modal.present();
   }
 
   reorderItems(indexes) {
-    this.boardsprovider.boards[this.boardsprovider.boards.indexOf(this.board)].columns[this.board.columns.indexOf(this.column)].cards = reorderArray(this.boardsprovider.boards[this.boardsprovider.boards.indexOf(this.board)].columns[this.board.columns.indexOf(this.column)].cards, indexes);
+    
+    // For SOME reason, this interface changed and caused weird behaviour with 'undefined' values in the arrays left behind by array.splice() not being cleaned up
+    // as well as the indexes passed in by the reorder function being
+    // a) Flipped
+    // b) Being positions, not indexes!
+    
+    let correctIndexes = {
+      from : indexes.to -1,
+      to: indexes.from -1
+    }
+
+    function reorderArray(array, indexes) {
+      var element = array[indexes.from];
+      array.splice(indexes.from, 1);
+      array = array.filter(value => value != 'undefined');
+      array.splice(indexes.to, 0, element);
+      return array;
+    }
+
+    this.boardsprovider.boards[this.boardsprovider.boards.indexOf(this.board)].columns[this.board.columns.indexOf(this.column)].cards = reorderArray(this.column.cards, correctIndexes);
     this.boardsprovider.writeToDataBase();
   }
 }
