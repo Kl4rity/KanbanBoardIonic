@@ -40,12 +40,12 @@ export class KanbancolumnComponent {
     
     // For SOME reason, this interface changed and caused weird behaviour with 'undefined' values in the arrays left behind by array.splice() not being cleaned up
     // as well as the indexes passed in by the reorder function being
-    // a) Flipped
+    // a) Flipped / UPDATE: No longer! 
     // b) Being positions, not indexes!
     
     let correctIndexes = {
-      from : indexes.to -1,
-      to: indexes.from -1
+      from : indexes.from -1,
+      to : indexes.to -1
     }
 
     function reorderArray(array, indexes) {
